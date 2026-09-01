@@ -2,9 +2,19 @@
   "type": "header",
   "name": "t:section_groups.header.name",
   "sections": {
+    "announcement": {
+      "type": "announcement-bar",
+      "settings": {
+        "phone": "+55 11 2345-6789",
+        "message": "Ganhe até 50% OFF em itens selecionados",
+        "link_label": "Comprar agora",
+        "language_label": "PT-BR"
+      }
+    },
     "nav": {
-      "type": "nav"
+      "type": "nav",
+      "settings": {}
     }
   },
-  "order": ["nav"]
+  "order": ["announcement", "nav"]
 }

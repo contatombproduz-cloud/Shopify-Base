@@ -1,0 +1,58 @@
+{%- liquid
+  assign selected_variant = card_product.selected_or_first_available_variant
+  assign rating_value = card_product.metafields.reviews.rating.value.rating | default: card_product.metafields.reviews.rating.value
+  assign rating_count = card_product.metafields.reviews.rating_count.value | default: card_product.metafields.reviews.rating_count
+-%}
+
+<article class="shopcart-card">
+  <div class="shopcart-card__media">
+    <a href="{{ card_product.url }}" class="shopcart-card__image-link" aria-label="{{ card_product.title | escape }}">
+      {%- if card_product.featured_media -%}
+        {{
+          card_product.featured_media
+          | image_url: width: 720
+          | image_tag:
+            loading: 'lazy',
+            class: 'shopcart-card__image',
+            widths: '240, 360, 540, 720',
+            sizes: '(min-width: 1000px) 25vw, 50vw',
+            alt: card_product.featured_media.alt | default: card_product.title | escape
+        }}
+      {%- else -%}
+        {{ 'product-1' | placeholder_svg_tag: 'shopcart-card__image placeholder-svg' }}
+      {%- endif -%}
+    </a>
+    <button type="button" class="shopcart-card__favorite" aria-label="Adicionar {{ card_product.title | escape }} aos favoritos" aria-pressed="false">
+      <svg aria-hidden="true" viewBox="0 0 24 24" fill="none"><path d="M20.8 4.9a5.4 5.4 0 0 0-7.7 0L12 6l-1.1-1.1a5.4 5.4 0 0 0-7.7 7.7L12 21l8.8-8.4a5.4 5.4 0 0 0 0-7.7Z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></svg>
+    </button>
+  </div>
+
+  <div class="shopcart-card__info">
+    <div class="shopcart-card__title-row">
+      <h3 class="shopcart-card__title"><a href="{{ card_product.url }}">{{ card_product.title | escape }}</a></h3>
+      {% render 'price', product: card_product, use_variant: false, show_compare: true, price_class: 'shopcart-card__price' %}
+    </div>
+
+    {%- if card_product.description != blank -%}
+      <p class="shopcart-card__description">{{ card_product.description | strip_html | truncate: 76 }}</p>
+    {%- elsif card_product.vendor != blank -%}
+      <p class="shopcart-card__description">{{ card_product.vendor | escape }}</p>
+    {%- endif -%}
+
+    {%- if rating_value != blank and rating_count != blank -%}
+      <div class="shopcart-card__rating" aria-label="Avaliação {{ rating_value }} de 5, com {{ rating_count }} avaliações">
+        <strong>{{ rating_value }}</strong>
+        <span aria-hidden="true">★★★★★</span>
+        <small>({{ rating_count }})</small>
+      </div>
+    {%- endif -%}
+
+    {%- form 'product', card_product, class: 'shopcart-card__form', data-type: 'add-to-cart-form' -%}
+      <input type="hidden" name="id" value="{{ selected_variant.id }}">
+      <input type="hidden" name="quantity" value="1">
+      <button class="shopcart-card__add" type="submit" name="add" {% unless selected_variant.available %}disabled{% endunless %}>
+        {%- if selected_variant.available -%}Adicionar ao carrinho{%- else -%}Esgotado{%- endif -%}
+      </button>
+    {%- endform -%}
+  </div>
+</article>

@@ -50,7 +50,7 @@
         "type": "color",
         "id": "color_text",
         "label": "t:settings_schema.colors.settings.color_text.label",
-        "default": "#000000"
+        "default": "#172721"
       },
       {
         "type": "header",
@@ -60,7 +60,7 @@
         "type": "color",
         "id": "color_background_contrast",
         "label": "t:settings_schema.colors.settings.color_background_contrast.label",
-        "default": "#f2f3f8"
+        "default": "#f5f6f6"
       },
       {
         "type": "color",
@@ -76,7 +76,7 @@
         "type": "color",
         "id": "color_accent",
         "label": "t:settings_schema.colors.settings.color_accent.label",
-        "default": "#ff0033"
+        "default": "#064a38"
       },
       {
         "type": "color",
@@ -98,7 +98,7 @@
         "type": "color",
         "id": "color_border",
         "label": "t:settings_schema.colors.settings.color_border.label",
-        "default": "#c2c2c2"
+        "default": "#dce3e0"
       }
     ]
   },
@@ -158,7 +158,7 @@
         "step": 20,
         "unit": "px",
         "label": "t:settings_schema.layout.settings.page_width.label",
-        "default": 1200
+        "default": 1240
       },
       {
         "type": "range",
@@ -168,7 +168,7 @@
         "step": 4,
         "unit": "px",
         "label": "t:settings_schema.layout.settings.spacing_sections.label",
-        "default": 40
+        "default": 56
       },
       {
         "type": "range",
@@ -178,7 +178,7 @@
         "step": 2,
         "unit": "px",
         "label": "t:settings_schema.layout.settings.buttons_radius.label",
-        "default": 4
+        "default": 24
       },
       {
         "type": "range",
@@ -188,7 +188,7 @@
         "step": 2,
         "unit": "px",
         "label": "t:settings_schema.layout.settings.inputs_radius.label",
-        "default": 4
+        "default": 24
       },
       {
         "type": "range",
@@ -198,7 +198,7 @@
         "step": 2,
         "unit": "px",
         "label": "t:settings_schema.layout.settings.media_radius.label",
-        "default": 8
+        "default": 12
       }
     ]
   },
@@ -222,7 +222,7 @@
             "label": "t:settings_schema.product_cards.settings.card_image_ratio.options__3.label"
           }
         ],
-        "default": "portrait",
+        "default": "square",
         "label": "t:settings_schema.product_cards.settings.card_image_ratio.label"
       },
       {

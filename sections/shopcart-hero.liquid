@@ -1,0 +1,84 @@
+{%- liquid
+  assign hero_alt = section.settings.image.alt | default: section.settings.heading | escape
+-%}
+
+<section class="shopcart-hero page-width" data-section-id="{{ section.id }}">
+  <div class="shopcart-hero__panel">
+    {%- if section.settings.image != blank -%}
+      {{
+        section.settings.image
+        | image_url: width: 2400
+        | image_tag:
+          loading: 'eager',
+          fetchpriority: 'high',
+          class: 'shopcart-hero__image',
+          widths: '750, 1100, 1500, 2000, 2400',
+          sizes: '(min-width: 1200px) 1160px, calc(100vw - 40px)',
+          alt: hero_alt
+      }}
+    {%- else -%}
+      <img
+        class="shopcart-hero__image"
+        src="{{ 'shopcart-headphone-hero.png' | asset_url }}"
+        width="1792"
+        height="896"
+        loading="eager"
+        fetchpriority="high"
+        alt="{{ section.settings.heading | escape }}"
+      >
+    {%- endif -%}
+
+    <div class="shopcart-hero__content">
+      {%- if section.settings.eyebrow != blank -%}
+        <p class="shopcart-hero__eyebrow">{{ section.settings.eyebrow | escape }}</p>
+      {%- endif -%}
+      <h1 class="shopcart-hero__heading">{{ section.settings.heading | escape | newline_to_br }}</h1>
+      {%- if section.settings.text != blank -%}
+        <div class="shopcart-hero__text rte">{{ section.settings.text }}</div>
+      {%- endif -%}
+      {%- if section.settings.button_label != blank -%}
+        <a class="button shopcart-hero__button" href="{{ section.settings.button_link | default: routes.all_products_collection_url }}">
+          {{ section.settings.button_label | escape }}
+        </a>
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+
+<style>
+  .shopcart-hero { padding-top: 14px; }
+  .shopcart-hero__panel { position: relative; min-height: 286px; overflow: hidden; border-radius: 4px; background: #fbefe4; }
+  .shopcart-hero__image { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center; }
+  .shopcart-hero__content { position: relative; z-index: 1; width: min(52%, 610px); padding: clamp(42px, 6vw, 78px) clamp(28px, 6vw, 88px); color: #063f31; }
+  .shopcart-hero__eyebrow { margin: 0 0 8px; font-size: 12px; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; }
+  .shopcart-hero__heading { max-width: 560px; margin: 0; font-size: clamp(34px, 4.2vw, 58px); line-height: .99; letter-spacing: -.045em; }
+  .shopcart-hero__text { max-width: 440px; margin-top: 14px; font-size: 15px; }
+  .shopcart-hero__text p { margin: 0; }
+  .shopcart-hero__button { min-height: 42px; margin-top: 24px; padding-inline: 25px; background: #064a38; border-color: #064a38; border-radius: 999px; font-weight: 800; }
+
+  @media screen and (max-width: 749px) {
+    .shopcart-hero { padding-top: 10px; }
+    .shopcart-hero__panel { min-height: 470px; display: flex; align-items: flex-end; background: #fbefe4; }
+    .shopcart-hero__image { height: 62%; inset-block: 0 auto; object-position: 72% center; }
+    .shopcart-hero__panel::after { content: ''; position: absolute; inset: 42% 0 0; background: linear-gradient(to bottom, rgba(251,239,228,0), #fbefe4 26%); }
+    .shopcart-hero__content { width: 100%; padding: 250px 24px 34px; text-align: center; }
+    .shopcart-hero__heading { font-size: clamp(34px, 11vw, 46px); }
+    .shopcart-hero__text { margin-inline: auto; }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Hero Shopcart",
+  "tag": "section",
+  "settings": [
+    { "type": "image_picker", "id": "image", "label": "Imagem do banner" },
+    { "type": "text", "id": "eyebrow", "label": "Texto superior", "default": "Sua trilha, do seu jeito" },
+    { "type": "textarea", "id": "heading", "label": "Título", "default": "Até 50% OFF em\nFones Selecionados" },
+    { "type": "richtext", "id": "text", "label": "Descrição", "default": "<p>Som de alta qualidade para todos os momentos.</p>" },
+    { "type": "text", "id": "button_label", "label": "Texto do botão", "default": "Comprar agora" },
+    { "type": "url", "id": "button_link", "label": "Link do botão" }
+  ],
+  "presets": [{ "name": "Hero Shopcart" }]
+}
+{% endschema %}

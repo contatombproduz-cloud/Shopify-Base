@@ -76,6 +76,10 @@ summary:focus-visible,
   box-sizing: border-box;
 }
 
+html { scroll-behavior: smooth; }
+body { min-width: 320px; }
+button, input, select, textarea { font: inherit; }
+
 /* Shared button */
 .button,
 button.button {

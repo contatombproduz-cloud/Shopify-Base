@@ -1,19 +1,33 @@
 {
   "sections": {
     "hero": {
-      "type": "image-banner",
-      "blocks": {
-        "heading": { "type": "heading", "settings": { "heading": "Welcome to your store" } },
-        "text": { "type": "text", "settings": { "text": "<p>Add your headline and shop link here.</p>" } },
-        "button": { "type": "button", "settings": { "button_label": "Shop now" } }
-      },
-      "block_order": ["heading", "text", "button"],
-      "settings": { "height": "medium", "text_alignment": "center" }
+      "type": "shopcart-hero",
+      "settings": {
+        "eyebrow": "Sua trilha, do seu jeito",
+        "heading": "Até 50% OFF em\nFones Selecionados",
+        "text": "<p>Som de alta qualidade para todos os momentos.</p>",
+        "button_label": "Comprar agora"
+      }
     },
-    "featured": {
-      "type": "featured-collection",
-      "settings": { "heading": "Featured collection", "products_to_show": 4, "columns_desktop": 4 }
+    "showcase": {
+      "type": "shopcart-collection",
+      "blocks": {
+        "filter_type": { "type": "filter", "settings": { "label": "Tipo de fone" } },
+        "filter_price": { "type": "filter", "settings": { "label": "Preço" } },
+        "filter_review": { "type": "filter", "settings": { "label": "Avaliação" } },
+        "filter_color": { "type": "filter", "settings": { "label": "Cor" } },
+        "filter_material": { "type": "filter", "settings": { "label": "Material" } },
+        "filter_offer": { "type": "filter", "settings": { "label": "Oferta" } }
+      },
+      "block_order": ["filter_type", "filter_price", "filter_review", "filter_color", "filter_material", "filter_offer"],
+      "settings": {
+        "eyebrow": "Escolhas que combinam com você",
+        "heading": "Fones para você",
+        "products_to_show": 8,
+        "columns_desktop": 4,
+        "show_view_all": true
+      }
     }
   },
-  "order": ["hero", "featured"]
+  "order": ["hero", "showcase"]
 }
