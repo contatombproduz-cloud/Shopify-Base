@@ -1,3 +1,12 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "type": "footer",
   "name": "Rodapé",
@@ -5,21 +14,32 @@
     "footer": {
       "type": "footer",
       "blocks": {
-        "discover": { "type": "menu", "settings": { "heading": "Descubra" } },
-        "support": { "type": "text", "settings": { "heading": "Atendimento", "text": "<p>Segunda a sexta, das 9h às 18h.<br>Estamos aqui para ajudar.</p>" } }
+        "discover": {
+          "type": "menu",
+          "settings": {
+            "heading": "Descubra"
+          }
+        },
+        "support": {
+          "type": "text",
+          "settings": {
+            "heading": "Atendimento",
+            "text": "<p>Segunda a sexta, das 9h às 18h.<br>Estamos aqui para ajudar.</p>"
+          }
+        }
       },
-      "block_order": ["discover", "support"],
+      "block_order": [
+        "discover",
+        "support"
+      ],
       "settings": {
-        "kicker": "O clube da diversão",
-        "heading": "Novidades que fazem os olhos brilharem",
-        "text": "<p>Receba lançamentos, ideias de presentes e ofertas para brincar muito.</p>",
-        "newsletter_heading": "Entre para a brincadeira",
-        "brand_text": "Brinquedos escolhidos para criar memórias felizes em família.",
         "show_social": true,
         "show_payment_icons": true,
         "enable_localization": false
       }
     }
   },
-  "order": ["footer"]
+  "order": [
+    "footer"
+  ]
 }
