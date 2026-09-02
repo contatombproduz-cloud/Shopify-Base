@@ -17,7 +17,8 @@
         "discover": {
           "type": "menu",
           "settings": {
-            "heading": "Descubra"
+            "heading": "Descubra",
+            "menu": ""
           }
         },
         "support": {
@@ -33,6 +34,12 @@
         "support"
       ],
       "settings": {
+        "logo": "shopify://shop_images/LOGO_BABABO_2.png",
+        "kicker": "O clube da diversão",
+        "heading": "Novidades que fazem os olhos brilharem",
+        "text": "<p>Receba lançamentos, ideias de presentes e ofertas para brincar muito.</p>",
+        "newsletter_heading": "Entre para a brincadeira",
+        "brand_text": "Brinquedos escolhidos para criar memórias felizes em família.",
         "show_social": true,
         "show_payment_icons": true,
         "enable_localization": false
