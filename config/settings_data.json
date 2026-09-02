@@ -11,6 +11,7 @@
   "current": {
     "logo": "shopify://shop_images/LOGO_BABABO_2.png",
     "logo_width": 120,
+    "favicon": "shopify://shop_images/IMG_1646.jpg",
     "color_background": "#ffffff",
     "color_text": "#172721",
     "color_background_contrast": "#f5f6f6",
