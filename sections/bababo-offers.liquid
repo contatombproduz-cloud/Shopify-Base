@@ -1,0 +1,64 @@
+{{ 'bababo-editable.css' | asset_url | stylesheet_tag }}
+
+<section class="bababo-section bababo-page-bg" style="padding: {{ section.settings.padding_top }}px 0 {{ section.settings.padding_bottom }}px;">
+  <div class="bababo-shell">
+    <div class="bababo-heading">
+      <div>
+        <h2>{{ section.settings.heading }}</h2>
+        {% if section.settings.subheading != blank %}<p>{{ section.settings.subheading }}</p>{% endif %}
+      </div>
+      {% if section.settings.link_label != blank %}<a href="{{ section.settings.link_url }}">{{ section.settings.link_label }}</a>{% endif %}
+    </div>
+
+    <div class="bababo-scroll-row">
+      {% for block in section.blocks %}
+        <a class="bababo-offer-card" href="{{ block.settings.link }}" style="--bababo-offer-a: {{ block.settings.color_a }}; --bababo-offer-b: {{ block.settings.color_b }};" {{ block.shopify_attributes }}>
+          <span>{{ block.settings.icon }}</span>
+          <div>
+            <h3>{{ block.settings.title }}</h3>
+            {% if block.settings.text != blank %}<p>{{ block.settings.text }}</p>{% endif %}
+          </div>
+        </a>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Bababo - Destaques",
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Título", "default": "Mais procurados" },
+    { "type": "textarea", "id": "subheading", "label": "Subtítulo", "default": "Monte chamadas rápidas para campanhas, linhas e produtos campeões." },
+    { "type": "text", "id": "link_label", "label": "Texto do link", "default": "comprar" },
+    { "type": "url", "id": "link_url", "label": "Link" },
+    { "type": "range", "id": "padding_top", "label": "Espaço superior", "min": 0, "max": 100, "step": 4, "unit": "px", "default": 32 },
+    { "type": "range", "id": "padding_bottom", "label": "Espaço inferior", "min": 0, "max": 100, "step": 4, "unit": "px", "default": 24 }
+  ],
+  "blocks": [
+    {
+      "type": "offer",
+      "name": "Destaque",
+      "settings": [
+        { "type": "text", "id": "icon", "label": "Ícone", "default": "🦖" },
+        { "type": "text", "id": "title", "label": "Título", "default": "Mordedores Dino" },
+        { "type": "text", "id": "text", "label": "Texto", "default": "Bebês e primeira infância" },
+        { "type": "url", "id": "link", "label": "Link" },
+        { "type": "color", "id": "color_a", "label": "Cor inicial", "default": "#ff3e91" },
+        { "type": "color", "id": "color_b", "label": "Cor final", "default": "#ff8c2a" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Bababo - Destaques",
+      "blocks": [
+        { "type": "offer", "settings": { "icon": "🦖", "title": "Mordedores Dino", "text": "Bebês e primeira infância", "color_a": "#ff3e91", "color_b": "#ff8c2a" } },
+        { "type": "offer", "settings": { "icon": "🔫", "title": "Brinquedos de ação", "text": "Aventuras criativas", "color_a": "#2f9df4", "color_b": "#8450ee" } },
+        { "type": "offer", "settings": { "icon": "💄", "title": "Mini salão", "text": "Secador e maquiagem infantil", "color_a": "#62ce87", "color_b": "#20a7d8" } },
+        { "type": "offer", "settings": { "icon": "🚗", "title": "Colecionáveis", "text": "Carrinhos e presentes", "color_a": "#8d43d8", "color_b": "#ff69b5" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

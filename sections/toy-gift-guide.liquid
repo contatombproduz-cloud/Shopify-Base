@@ -1,0 +1,38 @@
+<section class="toy-content-section toy-gift-guide">
+  <div class="page-width">
+    <div class="toy-content-heading" data-toy-reveal><p>{{ section.settings.kicker | escape }}</p><h2>{{ section.settings.heading | escape }}</h2><div>{{ section.settings.text }}</div></div>
+    <div class="toy-guide-grid">
+      {% for block in section.blocks %}
+        <a class="toy-guide-card" href="{{ block.settings.link | default: routes.all_products_collection_url }}" data-toy-reveal {{ block.shopify_attributes }} style="--guide-a:{{ block.settings.color_a }};--guide-b:{{ block.settings.color_b }}">
+          <span class="toy-guide-card__age">{{ block.settings.age | escape }}</span>
+          <i aria-hidden="true">{{ block.settings.icon }}</i>
+          <h3>{{ block.settings.heading | escape }}</h3>
+          <p>{{ block.settings.text | escape }}</p>
+          <strong>{{ block.settings.link_label | escape }} →</strong>
+        </a>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Página - Presentes",
+  "settings": [
+    { "type": "text", "id": "kicker", "label": "Chamada", "default": "Ajuda para escolher" },
+    { "type": "text", "id": "heading", "label": "Título", "default": "O presente certo para cada fase" },
+    { "type": "richtext", "id": "text", "label": "Texto", "default": "<p>Explore sugestões por idade e encontre uma brincadeira que combina com cada criança.</p>" }
+  ],
+  "blocks": [{ "type": "guide", "name": "Faixa de presente", "settings": [
+    { "type": "text", "id": "age", "label": "Faixa etária", "default": "0 a 2 anos" },
+    { "type": "text", "id": "icon", "label": "Emoji", "default": "🧸" },
+    { "type": "text", "id": "heading", "label": "Título", "default": "Primeiras descobertas" },
+    { "type": "textarea", "id": "text", "label": "Texto", "default": "Texturas, sons e formas para descobrir o mundo." },
+    { "type": "text", "id": "link_label", "label": "Texto do link", "default": "Ver sugestões" },
+    { "type": "url", "id": "link", "label": "Link" },
+    { "type": "color", "id": "color_a", "label": "Cor inicial", "default": "#7d54c2" },
+    { "type": "color", "id": "color_b", "label": "Cor final", "default": "#3d9bd8" }
+  ] }],
+  "presets": [{ "name": "Página - Presentes", "blocks": [{"type":"guide"},{"type":"guide"},{"type":"guide"},{"type":"guide"}] }]
+}
+{% endschema %}

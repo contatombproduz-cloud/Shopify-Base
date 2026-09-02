@@ -1,0 +1,32 @@
+{
+  "sections": {
+    "hero": {
+      "type": "toy-page-hero",
+      "settings": {
+        "image_alt": "Mundo infantil colorido e estrelado",
+        "eyebrow": "Central de ajuda",
+        "heading": "Estamos aqui para ajudar",
+        "text": "<p>Encontre respostas rápidas e deixe sua experiência de compra ainda mais tranquila.</p>",
+        "button_label": "Falar com atendimento",
+        "button_link": "/pages/contact"
+      }
+    },
+    "faq": {
+      "type": "toy-faq",
+      "blocks": {
+        "order": { "type": "question", "settings": { "question": "Como acompanho meu pedido?", "answer": "<p>Entre em sua conta e abra a área de pedidos para acompanhar cada etapa da entrega.</p>" } },
+        "delivery": { "type": "question", "settings": { "question": "Como funciona o prazo de entrega?", "answer": "<p>O prazo é calculado de acordo com o CEP e aparece antes da finalização da compra.</p>" } },
+        "exchange": { "type": "question", "settings": { "question": "Posso trocar um produto?", "answer": "<p>Sim. Consulte a política de trocas da loja ou fale com nossa equipe para receber orientação.</p>" } },
+        "payment": { "type": "question", "settings": { "question": "Quais formas de pagamento são aceitas?", "answer": "<p>As opções habilitadas pela loja aparecem no checkout seguro da Shopify.</p>" } },
+        "gift": { "type": "question", "settings": { "question": "Vocês ajudam a escolher presentes?", "answer": "<p>Sim! Use o Guia de Presentes ou entre em contato para receber uma sugestão personalizada.</p>" } }
+      },
+      "block_order": ["order", "delivery", "exchange", "payment", "gift"],
+      "settings": {
+        "kicker": "Pergunte à vontade",
+        "heading": "Dúvidas frequentes",
+        "text": "<p>Respostas rápidas para sua compra ficar leve e tranquila.</p>"
+      }
+    }
+  },
+  "order": ["hero", "faq"]
+}

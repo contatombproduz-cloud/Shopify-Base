@@ -1,0 +1,29 @@
+<section class="toy-content-section toy-faq">
+  <div class="page-width toy-faq__layout">
+    <div class="toy-content-heading" data-toy-reveal><p>{{ section.settings.kicker | escape }}</p><h2>{{ section.settings.heading | escape }}</h2><div>{{ section.settings.text }}</div><span class="toy-faq__mascot" aria-hidden="true">🤔</span></div>
+    <div class="toy-faq__list">
+      {% for block in section.blocks %}
+        <details class="toy-faq__item" data-toy-reveal {{ block.shopify_attributes }}>
+          <summary>{{ block.settings.question | escape }}<span aria-hidden="true">+</span></summary>
+          <div class="rte">{{ block.settings.answer }}</div>
+        </details>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Página infantil - Dúvidas",
+  "settings": [
+    { "type": "text", "id": "kicker", "label": "Chamada", "default": "Pergunte à vontade" },
+    { "type": "text", "id": "heading", "label": "Título", "default": "Dúvidas frequentes" },
+    { "type": "richtext", "id": "text", "label": "Texto", "default": "<p>Respostas rápidas para sua compra ficar leve e tranquila.</p>" }
+  ],
+  "blocks": [{ "type": "question", "name": "Pergunta", "settings": [
+    { "type": "text", "id": "question", "label": "Pergunta", "default": "Como acompanho meu pedido?" },
+    { "type": "richtext", "id": "answer", "label": "Resposta", "default": "<p>Entre em sua conta e abra a área de pedidos para acompanhar cada etapa.</p>" }
+  ] }],
+  "presets": [{ "name": "Página infantil - Dúvidas", "blocks": [{"type":"question"},{"type":"question"},{"type":"question"},{"type":"question"}] }]
+}
+{% endschema %}

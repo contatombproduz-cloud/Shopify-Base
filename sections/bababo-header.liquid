@@ -1,0 +1,80 @@
+{{ 'bababo-editable.css' | asset_url | stylesheet_tag }}
+
+<section class="bababo-section bababo-topbar">
+  <div class="bababo-shell">
+    <div class="bababo-nav">
+      {% if section.settings.show_menu_button %}
+        <details class="bababo-menu">
+          <summary class="bababo-icon-button" aria-label="{{ section.settings.menu_label }}">{{ section.settings.menu_icon }}</summary>
+          <nav class="bababo-menu-panel" aria-label="Menu principal">
+            <ul role="list">
+              {% for link in section.settings.menu.links %}
+                <li>
+                  <a href="{{ link.url }}">{{ link.title | escape }}</a>
+                  {% if link.links != blank %}
+                    <ul role="list">
+                      {% for child_link in link.links %}
+                        <li><a href="{{ child_link.url }}">{{ child_link.title | escape }}</a></li>
+                      {% endfor %}
+                    </ul>
+                  {% endif %}
+                </li>
+              {% else %}
+                <li><a href="{{ routes.all_products_collection_url }}">Todos os produtos</a></li>
+                <li><a href="{{ routes.search_url }}?q=meninas">Meninas</a></li>
+                <li><a href="{{ routes.search_url }}?q=meninos">Meninos</a></li>
+                <li><a href="{{ routes.search_url }}?q=bebes">Bebês</a></li>
+              {% endfor %}
+            </ul>
+          </nav>
+        </details>
+      {% endif %}
+
+      <a class="bababo-logo-link" href="{{ routes.root_url }}" style="--bababo-logo-width: {{ section.settings.logo_width }}px" aria-label="{{ section.settings.logo_alt }}">
+        {% if section.settings.logo != blank %}
+          {{ section.settings.logo | image_url: width: 520 | image_tag: loading: 'eager', alt: section.settings.logo_alt }}
+        {% else %}
+          <img src="{{ 'bababo-logo.png' | asset_url }}" alt="{{ section.settings.logo_alt }}" width="360" height="225" loading="eager">
+        {% endif %}
+      </a>
+
+      <a class="bababo-icon-button" href="{{ routes.cart_url }}" aria-label="{{ section.settings.cart_label }}">{{ section.settings.cart_icon }}</a>
+
+      {% if section.settings.show_search %}
+        <form class="bababo-search" action="{{ routes.search_url }}" method="get" role="search">
+          <input name="q" type="search" placeholder="{{ section.settings.search_placeholder }}" autocomplete="off">
+          <button type="submit" aria-label="{{ section.settings.search_button_label }}">{{ section.settings.search_icon }}</button>
+        </form>
+      {% endif %}
+    </div>
+  </div>
+
+  {% if section.settings.announcement != blank %}
+    <div class="bababo-strip">{{ section.settings.announcement }}</div>
+  {% endif %}
+</section>
+
+{% schema %}
+{
+  "name": "Bababo - Topo editável",
+  "settings": [
+    { "type": "image_picker", "id": "logo", "label": "Logo" },
+    { "type": "text", "id": "logo_alt", "label": "Texto alternativo do logo", "default": "Bababo Kids - Diversão que conecta!" },
+    { "type": "range", "id": "logo_width", "label": "Largura do logo", "min": 120, "max": 320, "step": 10, "unit": "px", "default": 210 },
+    { "type": "checkbox", "id": "show_menu_button", "label": "Mostrar botão de menu", "default": true },
+    { "type": "link_list", "id": "menu", "label": "Menu", "default": "main-menu" },
+    { "type": "text", "id": "menu_icon", "label": "Ícone do menu", "default": "☰" },
+    { "type": "text", "id": "menu_label", "label": "Acessibilidade do menu", "default": "Abrir menu" },
+    { "type": "checkbox", "id": "show_search", "label": "Mostrar busca", "default": true },
+    { "type": "text", "id": "search_placeholder", "label": "Texto da busca", "default": "Buscar brinquedos, mordedores, carrinhos..." },
+    { "type": "text", "id": "search_icon", "label": "Ícone da busca", "default": "⌕" },
+    { "type": "text", "id": "search_button_label", "label": "Acessibilidade da busca", "default": "Pesquisar" },
+    { "type": "text", "id": "cart_icon", "label": "Ícone do carrinho", "default": "🛒" },
+    { "type": "text", "id": "cart_label", "label": "Acessibilidade do carrinho", "default": "Carrinho" },
+    { "type": "text", "id": "announcement", "label": "Faixa de anúncio", "default": "Diversão que conecta: brinquedos para meninas, meninos e bebês em todo o Brasil" }
+  ],
+  "presets": [
+    { "name": "Bababo - Topo editável" }
+  ]
+}
+{% endschema %}

@@ -9,10 +9,7 @@
         {%- assign logo_alt = settings.logo.alt | default: shop.name | escape -%}
         {{ settings.logo | image_url: width: 600 | image_tag: class: 'shopcart-header__logo', widths: '120, 180, 240, 360, 600', width: settings.logo_width, alt: logo_alt }}
       {%- else -%}
-        <span class="shopcart-header__brand-mark" aria-hidden="true">
-          <svg viewBox="0 0 42 42"><path d="M8 14h25l-2 17H11L8 14Z" fill="#fff" stroke="currentColor" stroke-width="2"/><path d="M15 14c0-5 2-8 6-8s6 3 6 8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><circle cx="16" cy="34" r="2.3" fill="#f3a712"/><circle cx="27" cy="34" r="2.3" fill="#e55934"/><path d="m13 18 5 5 10-9" fill="none" stroke="#47a447" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </span>
-        <span class="shopcart-header__brand-name">{{ shop.name }}</span>
+        <span class="toy-logo__word" aria-hidden="true"><i>B</i><i>r</i><i>i</i><i>n</i><i>c</i><i>a</i><i>!</i></span>
       {%- endif -%}
     </a>
 

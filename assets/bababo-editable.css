@@ -1,0 +1,918 @@
+.bababo-section {
+  --bababo-pink: #ff3e91;
+  --bababo-orange: #ff8c2a;
+  --bababo-blue: #2f9df4;
+  --bababo-green: #62ce87;
+  --bababo-purple: #8d43d8;
+  --bababo-lilac: #f3dbff;
+  --bababo-yellow: #fff05c;
+  --bababo-ink: #342146;
+  --bababo-muted: #75637d;
+  --bababo-soft: #fff7fb;
+  --bababo-line: #f0ddea;
+  color: var(--bababo-ink);
+  font-family: var(--font-body-family), Arial, sans-serif;
+}
+
+.template-index .section-announcement,
+.template-index .section-header,
+.template-index .footer {
+  display: none;
+}
+
+.bababo-section * {
+  box-sizing: border-box;
+  letter-spacing: 0;
+}
+
+.bababo-page-bg {
+  background:
+    radial-gradient(circle at 8% 12%, rgba(255, 240, 92, .45) 0 126px, transparent 127px),
+    radial-gradient(circle at 92% 7%, rgba(47, 157, 244, .18) 0 150px, transparent 151px),
+    linear-gradient(180deg, #fff9fd 0%, #ffffff 46%, #fff7fb 100%);
+}
+
+.bababo-shell {
+  width: min(100%, 1180px);
+  margin: 0 auto;
+  padding: 0 18px;
+}
+
+.bababo-button {
+  min-height: 46px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 0;
+  border-radius: 999px;
+  padding: 0 22px;
+  background: var(--bababo-pink);
+  color: #fff;
+  font: inherit;
+  font-weight: 900;
+  text-decoration: none;
+  box-shadow: 0 12px 22px rgba(255, 62, 145, .2);
+  cursor: pointer;
+}
+
+.bababo-button--secondary {
+  background: #fff;
+  color: var(--bababo-purple);
+  box-shadow: inset 0 0 0 2px #ead4ff;
+}
+
+.bababo-heading {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 18px;
+  margin-bottom: 18px;
+}
+
+.bababo-heading h2 {
+  margin: 0;
+  font-size: clamp(24px, 4vw, 42px);
+  line-height: 1.05;
+  font-weight: 1000;
+  color: var(--bababo-ink);
+}
+
+.bababo-heading p {
+  margin: 6px 0 0;
+  color: var(--bababo-muted);
+  line-height: 1.45;
+}
+
+.bababo-heading a {
+  color: var(--bababo-purple);
+  font-weight: 900;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.bababo-scroll-row {
+  display: flex;
+  gap: 14px;
+  overflow-x: auto;
+  padding-bottom: 12px;
+  scrollbar-width: none;
+}
+
+.bababo-scroll-row::-webkit-scrollbar {
+  display: none;
+}
+
+.bababo-card {
+  background: #fff;
+  border: 1px solid rgba(240, 221, 234, .7);
+  border-radius: var(--bababo-radius, 20px);
+  box-shadow: 0 12px 30px rgba(93, 44, 110, .08);
+}
+
+.bababo-topbar {
+  position: sticky;
+  top: 0;
+  z-index: 25;
+  background: rgba(255, 255, 255, .93);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(240, 221, 234, .9);
+}
+
+.bababo-nav {
+  min-height: 78px;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 18px;
+}
+
+.bababo-logo-link {
+  display: inline-flex;
+  align-items: center;
+  justify-self: start;
+}
+
+.bababo-logo-link img {
+  width: min(var(--bababo-logo-width, 210px), 45vw);
+  height: auto;
+  display: block;
+}
+
+.bababo-search {
+  position: relative;
+}
+
+.bababo-search input {
+  width: 100%;
+  min-height: 46px;
+  border: 2px solid #ffd1e7;
+  border-radius: 999px;
+  background: #fff;
+  color: var(--bababo-ink);
+  font: inherit;
+  padding: 0 52px 0 20px;
+  outline: none;
+}
+
+.bababo-search button {
+  position: absolute;
+  right: 5px;
+  top: 5px;
+  width: 36px;
+  height: 36px;
+  border: 0;
+  border-radius: 50%;
+  background: var(--bababo-pink);
+  color: #fff;
+  cursor: pointer;
+}
+
+.bababo-icon-button {
+  width: auto;
+  min-width: 42px;
+  height: 42px;
+  padding: 0 12px;
+  border: 0;
+  border-radius: 999px;
+  display: grid;
+  place-items: center;
+  background: var(--bababo-lilac);
+  color: var(--bababo-purple);
+  font-size: 20px;
+  font-weight: 900;
+  text-decoration: none;
+}
+
+.bababo-menu {
+  position: relative;
+}
+
+.bababo-menu summary {
+  list-style: none;
+  cursor: pointer;
+}
+
+.bababo-menu summary::-webkit-details-marker {
+  display: none;
+}
+
+.bababo-menu-panel {
+  position: absolute;
+  left: 0;
+  top: calc(100% + 10px);
+  z-index: 40;
+  width: min(280px, calc(100vw - 24px));
+  padding: 12px;
+  border: 1px solid var(--bababo-line);
+  border-radius: 18px;
+  background: #fff;
+  box-shadow: 0 18px 44px rgba(93, 44, 110, .16);
+}
+
+.bababo-menu-panel ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.bababo-menu-panel a {
+  display: block;
+  padding: 10px 12px;
+  border-radius: 10px;
+  color: var(--bababo-ink);
+  font-weight: 900;
+  text-decoration: none;
+}
+
+.bababo-menu-panel a:hover {
+  background: var(--bababo-soft);
+  color: var(--bababo-purple);
+}
+
+.bababo-menu-panel ul ul a {
+  padding-left: 24px;
+  color: var(--bababo-muted);
+  font-size: 13px;
+}
+
+.bababo-strip {
+  background: linear-gradient(90deg, var(--bababo-pink), var(--bababo-orange), var(--bababo-blue), var(--bababo-green));
+  color: #fff;
+  text-align: center;
+  font-size: 13px;
+  font-weight: 900;
+  padding: 8px 16px;
+}
+
+.bababo-hero {
+  padding: var(--bababo-pad-top, 64px) 0 var(--bababo-pad-bottom, 38px);
+}
+
+.bababo-hero-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(300px, .78fr);
+  align-items: center;
+  gap: clamp(24px, 5vw, 58px);
+}
+
+.bababo-kicker {
+  display: inline-flex;
+  align-items: center;
+  min-height: 34px;
+  padding: 0 14px;
+  border-radius: 999px;
+  background: #fff;
+  color: var(--bababo-purple);
+  font-weight: 900;
+  box-shadow: 0 8px 24px rgba(141, 67, 216, .12);
+}
+
+.bababo-hero h1 {
+  margin: 18px 0 12px;
+  max-width: 720px;
+  font-size: clamp(42px, 7vw, 86px);
+  line-height: .92;
+  font-weight: 1000;
+  color: var(--bababo-ink);
+}
+
+.bababo-hero h1 span {
+  color: var(--bababo-pink);
+}
+
+.bababo-hero p {
+  max-width: 620px;
+  margin: 0;
+  color: var(--bababo-muted);
+  font-size: clamp(16px, 2vw, 20px);
+  line-height: 1.45;
+}
+
+.bababo-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 24px;
+}
+
+.bababo-hero-media {
+  position: relative;
+  min-height: 390px;
+  border-radius: 28px;
+  background: linear-gradient(145deg, #ffe9f5, #efe4ff 52%, #e2f8ff);
+  box-shadow: 0 26px 60px rgba(90, 34, 128, .14);
+  overflow: hidden;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+}
+
+.bababo-hero-media img {
+  width: min(92%, 520px);
+  height: auto;
+  filter: drop-shadow(0 16px 20px rgba(75, 42, 86, .18));
+}
+
+.bababo-hero-media--banner {
+  min-height: 430px;
+  align-items: stretch;
+  justify-items: stretch;
+  padding: 0;
+}
+
+.bababo-hero-media--banner img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: none;
+}
+
+.bababo-bubble {
+  position: absolute;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  color: #fff;
+  font-weight: 1000;
+  text-align: center;
+  line-height: 1.05;
+  box-shadow: 0 14px 24px rgba(52, 33, 70, .12);
+}
+
+.bababo-bubble--one {
+  left: 22px;
+  top: 24px;
+  width: 82px;
+  height: 82px;
+  background: var(--bababo-blue);
+}
+
+.bababo-bubble--two {
+  right: 22px;
+  bottom: 28px;
+  width: 98px;
+  height: 98px;
+  background: var(--bababo-orange);
+}
+
+.bababo-category-card {
+  flex: 0 0 168px;
+  min-height: 168px;
+  display: grid;
+  place-items: center;
+  padding: 18px;
+  color: var(--bababo-ink);
+  text-align: center;
+  text-decoration: none;
+}
+
+.bababo-category-card i {
+  width: 76px;
+  height: 76px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  margin: 0 auto 12px;
+  background: var(--bababo-tile-color, #fff4c5);
+  font-style: normal;
+  font-size: 34px;
+}
+
+.bababo-category-image {
+  width: 100%;
+  aspect-ratio: 1;
+  border-radius: 18px;
+  overflow: hidden;
+  margin-bottom: 12px;
+  background: var(--bababo-tile-color, #fff4c5);
+}
+
+.bababo-category-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.bababo-category-card strong {
+  display: block;
+  font-size: 18px;
+  font-weight: 1000;
+}
+
+.bababo-category-card small {
+  display: block;
+  margin-top: 4px;
+  color: var(--bababo-muted);
+  font-size: 12px;
+  line-height: 1.25;
+}
+
+.bababo-offer-card {
+  flex: 0 0 278px;
+  min-height: 230px;
+  border-radius: 22px;
+  padding: 22px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  color: #fff;
+  text-decoration: none;
+  background: linear-gradient(145deg, var(--bababo-offer-a, #ff3e91), var(--bababo-offer-b, #ff8c2a));
+  overflow: hidden;
+}
+
+.bababo-offer-card span {
+  font-size: 44px;
+}
+
+.bababo-offer-card h3 {
+  margin: 0;
+  font-size: 28px;
+  line-height: 1;
+  font-weight: 1000;
+}
+
+.bababo-offer-card p {
+  margin: 10px 0 0;
+  color: rgba(255, 255, 255, .9);
+  font-weight: 800;
+}
+
+.bababo-promo-banner {
+  position: relative;
+  overflow: hidden;
+  min-height: clamp(280px, 36vw, 420px);
+  border-radius: 28px;
+  display: grid;
+  align-items: center;
+  background: linear-gradient(135deg, #fff7fb, #f3dbff);
+  box-shadow: 0 22px 54px rgba(93, 44, 110, .1);
+}
+
+.bababo-promo-banner__image {
+  position: absolute;
+  inset: 0;
+}
+
+.bababo-promo-banner__image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.bababo-promo-banner__content {
+  position: relative;
+  z-index: 1;
+  width: min(560px, 100%);
+  padding: clamp(24px, 6vw, 58px);
+}
+
+.bababo-promo-banner__content h2 {
+  margin: 0;
+  color: var(--bababo-ink);
+  font-size: clamp(34px, 6vw, 68px);
+  line-height: .95;
+  font-weight: 1000;
+}
+
+.bababo-promo-banner__content p {
+  max-width: 440px;
+  margin: 14px 0 0;
+  color: var(--bababo-muted);
+  font-size: 18px;
+  line-height: 1.45;
+}
+
+.bababo-not-found {
+  min-height: 540px;
+  display: grid;
+  align-items: center;
+  padding: clamp(42px, 8vw, 90px) 0;
+}
+
+.bababo-not-found__grid {
+  display: grid;
+  grid-template-columns: minmax(0, .9fr) minmax(280px, 1fr);
+  gap: clamp(24px, 5vw, 58px);
+  align-items: center;
+}
+
+.bababo-not-found h1 {
+  margin: 0;
+  color: var(--bababo-ink);
+  font-size: clamp(42px, 7vw, 82px);
+  line-height: .95;
+  font-weight: 1000;
+}
+
+.bababo-not-found p {
+  max-width: 520px;
+  margin: 16px 0 0;
+  color: var(--bababo-muted);
+  font-size: 18px;
+  line-height: 1.5;
+}
+
+.bababo-not-found__image {
+  min-height: 320px;
+  border-radius: 28px;
+  overflow: hidden;
+  background: linear-gradient(145deg, #ffe9f5, #efe4ff 52%, #e2f8ff);
+  box-shadow: 0 22px 54px rgba(93, 44, 110, .1);
+}
+
+.bababo-not-found__image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.bababo-proof-grid {
+  display: grid;
+  grid-template-columns: repeat(var(--bababo-columns, 4), 1fr);
+  gap: 14px;
+}
+
+.bababo-proof-item {
+  min-height: 104px;
+  padding: 18px;
+  display: grid;
+  align-content: center;
+  gap: 6px;
+}
+
+.bababo-proof-item b {
+  color: var(--bababo-purple);
+  font-size: 24px;
+}
+
+.bababo-proof-item span {
+  color: var(--bababo-muted);
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.bababo-product-card {
+  flex: 0 0 228px;
+  padding: 12px;
+}
+
+.bababo-media {
+  min-height: 176px;
+  border-radius: 14px;
+  background: linear-gradient(145deg, #fff2c9, #ffe4f2);
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  margin-bottom: 10px;
+}
+
+.bababo-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.bababo-demo-icon {
+  font-size: 62px;
+}
+
+.bababo-rating {
+  color: #ffbf00;
+  font-size: 12px;
+  font-weight: 900;
+}
+
+.bababo-product-card h3 {
+  min-height: 42px;
+  margin: 6px 0 8px;
+  color: var(--bababo-ink);
+  font-size: 14px;
+  line-height: 1.28;
+  font-weight: 900;
+}
+
+.bababo-product-card h3 a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.bababo-price {
+  margin: 0 0 10px;
+  color: var(--bababo-pink);
+  font-size: 18px;
+  font-weight: 1000;
+}
+
+.bababo-add {
+  width: 100%;
+  min-height: 40px;
+  border: 0;
+  border-radius: 999px;
+  background: var(--bababo-green);
+  color: #fff;
+  font: inherit;
+  font-weight: 900;
+  cursor: pointer;
+}
+
+.bababo-story-grid {
+  display: grid;
+  grid-template-columns: .78fr 1fr;
+  align-items: center;
+  gap: 28px;
+}
+
+.bababo-story-logo {
+  min-height: 260px;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  border-radius: 24px;
+  background: linear-gradient(145deg, #fafafa, #f0f0f0);
+}
+
+.bababo-story-logo img {
+  width: 92%;
+  height: auto;
+}
+
+.bababo-story h2 {
+  margin: 0 0 12px;
+  color: var(--bababo-ink);
+  font-size: clamp(28px, 5vw, 54px);
+  line-height: 1;
+  font-weight: 1000;
+}
+
+.bababo-story p {
+  color: var(--bababo-muted);
+  line-height: 1.55;
+}
+
+.bababo-footer-section {
+  background: #fff;
+  border-top: 1px solid var(--bababo-line);
+  padding: 34px 0 42px;
+}
+
+.bababo-footer-grid {
+  display: grid;
+  grid-template-columns: 1.2fr repeat(3, 1fr);
+  gap: 28px;
+}
+
+.bababo-footer-section h3 {
+  margin: 0 0 10px;
+  color: var(--bababo-ink);
+  font-size: 16px;
+  font-weight: 1000;
+}
+
+.bababo-footer-section p,
+.bababo-footer-section a {
+  color: var(--bababo-muted);
+  font-size: 14px;
+  line-height: 1.6;
+  text-decoration: none;
+}
+
+.bababo-footer-logo img {
+  width: min(210px, 72vw);
+  height: auto;
+  display: block;
+  margin-bottom: 10px;
+}
+
+.bababo-footer-links {
+  display: grid;
+  gap: 6px;
+}
+
+.bababo-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.bababo-badge {
+  border-radius: 10px;
+  background: var(--bababo-soft);
+  color: var(--bababo-purple);
+  padding: 8px 10px;
+  font-size: 12px;
+  font-weight: 900;
+}
+
+@media (max-width: 860px) {
+  .bababo-nav {
+    grid-template-columns: auto 1fr auto;
+    gap: 10px;
+  }
+
+  .bababo-logo-link {
+    justify-self: center;
+  }
+
+  .bababo-search {
+    grid-column: 1 / -1;
+    grid-row: 2;
+    padding-bottom: 12px;
+  }
+
+  .bababo-hero-grid,
+  .bababo-not-found__grid,
+  .bababo-story-grid,
+  .bababo-footer-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .bababo-hero-media {
+    min-height: 300px;
+  }
+
+  .bababo-proof-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 560px) {
+  .bababo-shell {
+    padding: 0 12px;
+  }
+
+  .bababo-heading {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .bababo-category-card {
+    flex-basis: 142px;
+    min-height: 148px;
+  }
+
+  .bababo-proof-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Profundidade e movimento progressivo da experiência Bababo. */
+.bababo-depth-item {
+  --bababo-scroll-y: 0px;
+  --bababo-scroll-rotate: 0deg;
+  --bababo-pointer-x: 0deg;
+  --bababo-pointer-y: 0deg;
+  --bababo-shine-x: 50%;
+  --bababo-shine-y: 50%;
+  transform:
+    perspective(1100px)
+    translate3d(0, var(--bababo-scroll-y), 0)
+    rotateX(calc(var(--bababo-scroll-rotate) + var(--bababo-pointer-y)))
+    rotateY(var(--bababo-pointer-x));
+  transform-style: preserve-3d;
+  backface-visibility: hidden;
+  will-change: transform;
+  transition: transform .18s ease-out, box-shadow .3s ease;
+}
+
+.bababo-tilt-item {
+  position: relative;
+  isolation: isolate;
+}
+
+.bababo-tilt-item::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  border-radius: inherit;
+  pointer-events: none;
+  opacity: 0;
+  background: radial-gradient(circle at var(--bababo-shine-x) var(--bababo-shine-y), rgba(255,255,255,.42), transparent 42%);
+  transition: opacity .25s ease;
+}
+
+.bababo-tilt-item:hover::after {
+  opacity: 1;
+}
+
+.bababo-tilt-item:hover {
+  box-shadow: 0 22px 46px rgba(93, 44, 110, .16);
+}
+
+.bababo-hero-media img {
+  transform: translateZ(42px) scale(1.035);
+}
+
+.bababo-bubble {
+  transform: translateZ(76px);
+}
+
+.bababo-promo-banner__content {
+  transform: translateZ(46px);
+}
+
+.bababo-story-grid > * {
+  transform: translateZ(28px);
+}
+
+/* Halo de nuvem nos botões, criado como microinteração leve. */
+.bababo-button,
+.bababo-add,
+.bababo-icon-button {
+  --bababo-cloud: rgba(255, 211, 232, .82);
+  position: relative;
+  isolation: isolate;
+  overflow: visible;
+  transition: transform .25s cubic-bezier(.2,.8,.2,1), box-shadow .25s ease, filter .25s ease;
+}
+
+.bababo-button::before,
+.bababo-add::before,
+.bababo-icon-button::before {
+  content: '';
+  position: absolute;
+  z-index: -1;
+  inset: -10px -16px;
+  border-radius: 999px;
+  pointer-events: none;
+  opacity: 0;
+  transform: scale(.72) translateY(7px);
+  background:
+    radial-gradient(circle at 16% 60%, var(--bababo-cloud) 0 9px, transparent 10px),
+    radial-gradient(circle at 31% 37%, var(--bababo-cloud) 0 13px, transparent 14px),
+    radial-gradient(circle at 50% 58%, var(--bababo-cloud) 0 11px, transparent 12px),
+    radial-gradient(circle at 69% 34%, var(--bababo-cloud) 0 14px, transparent 15px),
+    radial-gradient(circle at 86% 61%, var(--bababo-cloud) 0 9px, transparent 10px);
+  filter: blur(.2px) drop-shadow(0 9px 10px rgba(141, 67, 216, .13));
+  transition: opacity .25s ease, transform .35s cubic-bezier(.2,.8,.2,1);
+}
+
+.bababo-button:hover,
+.bababo-button:focus-visible,
+.bababo-add:hover,
+.bababo-add:focus-visible,
+.bababo-icon-button:hover,
+.bababo-icon-button:focus-visible {
+  transform: translateY(-3px) scale(1.025);
+  filter: saturate(1.06);
+}
+
+.bababo-button:hover::before,
+.bababo-button:focus-visible::before,
+.bababo-add:hover::before,
+.bababo-add:focus-visible::before,
+.bababo-icon-button:hover::before,
+.bababo-icon-button:focus-visible::before {
+  opacity: .92;
+  transform: scale(1) translateY(0);
+  animation: bababo-cloud-float 2.8s ease-in-out infinite;
+}
+
+.bababo-button--secondary {
+  --bababo-cloud: rgba(232, 215, 255, .88);
+}
+
+.bababo-add {
+  --bababo-cloud: rgba(200, 246, 216, .9);
+}
+
+.bababo-icon-button {
+  --bababo-cloud: rgba(237, 207, 255, .88);
+}
+
+@keyframes bababo-cloud-float {
+  0%, 100% { background-position: 0 1px, 0 0, 0 2px, 0 0, 0 1px; }
+  50% { background-position: 0 -2px, 0 2px, 0 -1px, 0 2px, 0 -2px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .bababo-depth-item,
+  .bababo-button,
+  .bababo-add,
+  .bababo-icon-button,
+  .bababo-button::before,
+  .bababo-add::before,
+  .bababo-icon-button::before {
+    animation: none !important;
+    transition-duration: .01ms !important;
+    transform: none !important;
+  }
+}
+
+@media (max-width: 560px) {
+  .bababo-depth-item {
+    --bababo-pointer-x: 0deg !important;
+    --bababo-pointer-y: 0deg !important;
+  }
+
+  .bababo-button::before,
+  .bababo-add::before,
+  .bababo-icon-button::before {
+    inset: -8px -11px;
+  }
+}

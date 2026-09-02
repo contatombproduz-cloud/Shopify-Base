@@ -1,0 +1,30 @@
+{
+  "sections": {
+    "hero": {
+      "type": "toy-page-hero",
+      "settings": {
+        "image_alt": "Mundo mágico de brinquedos sob um céu estrelado",
+        "eyebrow": "Nossa história",
+        "heading": "Brincar transforma o mundo",
+        "text": "<p>Acreditamos em escolhas que aproximam famílias, despertam a criatividade e fazem cada fase ser inesquecível.</p>",
+        "button_label": "Conhecer os brinquedos",
+        "button_link": "/collections/all"
+      }
+    },
+    "about": {
+      "type": "toy-about",
+      "blocks": {
+        "imagination": { "type": "value", "settings": { "icon": "💡", "heading": "Imaginação", "text": "Brinquedos que convidam a inventar histórias e explorar novas ideias.", "color": "#ffd84d" } },
+        "care": { "type": "value", "settings": { "icon": "💜", "heading": "Escolha com carinho", "text": "Uma curadoria cuidadosa para diferentes idades e momentos.", "color": "#d8c3ff" } },
+        "together": { "type": "value", "settings": { "icon": "🌈", "heading": "Juntos é melhor", "text": "Diversão que aproxima crianças, amigos e toda a família.", "color": "#bceffd" } }
+      },
+      "block_order": ["imagination", "care", "together"],
+      "settings": {
+        "kicker": "Nosso jeito de brincar",
+        "heading": "Diversão com propósito",
+        "text": "<p>Selecionamos brinquedos que estimulam criatividade, movimento e bons momentos em família.</p>"
+      }
+    }
+  },
+  "order": ["hero", "about"]
+}

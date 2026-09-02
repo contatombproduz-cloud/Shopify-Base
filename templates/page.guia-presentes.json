@@ -1,0 +1,31 @@
+{
+  "sections": {
+    "hero": {
+      "type": "toy-page-hero",
+      "settings": {
+        "image_alt": "Presentes e brinquedos em um mundo colorido",
+        "eyebrow": "Guia de presentes",
+        "heading": "Encontre a surpresa perfeita",
+        "text": "<p>Escolha pela idade, pelo jeito de brincar ou pelo tamanho da aventura.</p>",
+        "button_label": "Ver todas as sugestões",
+        "button_link": "/collections/all"
+      }
+    },
+    "guide": {
+      "type": "toy-gifts",
+      "blocks": {
+        "baby": { "type": "guide", "settings": { "age": "0 a 2 anos", "icon": "🧸", "heading": "Primeiras descobertas", "text": "Texturas, sons e formas para conhecer o mundo.", "link_label": "Ver sugestões", "link": "/collections/all", "color_a": "#7451b7", "color_b": "#29a0d6" } },
+        "little": { "type": "guide", "settings": { "age": "3 a 5 anos", "icon": "🎨", "heading": "Imaginação em movimento", "text": "Faz de conta, arte e brincadeiras para criar.", "link_label": "Ver sugestões", "link": "/collections/all", "color_a": "#ee3d88", "color_b": "#ff8356" } },
+        "explorer": { "type": "guide", "settings": { "age": "6 a 8 anos", "icon": "🚀", "heading": "Grandes aventuras", "text": "Desafios, construções e missões para explorar.", "link_label": "Ver sugestões", "link": "/collections/all", "color_a": "#167fc3", "color_b": "#31c4ba" } },
+        "older": { "type": "guide", "settings": { "age": "9 anos ou mais", "icon": "🎮", "heading": "Jogadas incríveis", "text": "Jogos, estratégia e coleções cheias de personalidade.", "link_label": "Ver sugestões", "link": "/collections/all", "color_a": "#56349e", "color_b": "#a85ac4" } }
+      },
+      "block_order": ["baby", "little", "explorer", "older"],
+      "settings": {
+        "kicker": "Ajuda para escolher",
+        "heading": "O presente certo para cada fase",
+        "text": "<p>Explore sugestões por idade e encontre uma brincadeira que combina com cada criança.</p>"
+      }
+    }
+  },
+  "order": ["hero", "guide"]
+}

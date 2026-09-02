@@ -53,10 +53,12 @@
     {% render 'meta-tags' %}
 
     {{ 'index.css' | asset_url | stylesheet_tag }}
+    {{ 'toy-store.css' | asset_url | stylesheet_tag }}
     {% render 'css-variables' %}
 
     <script>document.documentElement.className = document.documentElement.className.replace('no-js', 'js');</script>
     <script src="{{ 'carrinho.js' | asset_url }}" defer="defer"></script>
+    <script src="{{ 'toy-store.js' | asset_url }}" defer="defer"></script>
 
     {{ content_for_header }}
   </head>

@@ -1,0 +1,102 @@
+{{ 'bababo-editable.css' | asset_url | stylesheet_tag }}
+
+<section class="bababo-section bababo-footer-section">
+  <div class="bababo-shell">
+    <div class="bababo-footer-grid">
+      <div>
+        <a class="bababo-footer-logo" href="{{ routes.root_url }}" aria-label="{{ section.settings.logo_alt }}">
+          {% if section.settings.logo != blank %}
+            {{ section.settings.logo | image_url: width: 420 | image_tag: loading: 'lazy', alt: section.settings.logo_alt }}
+          {% else %}
+            <img src="{{ 'bababo-logo.png' | asset_url }}" alt="{{ section.settings.logo_alt }}" width="360" height="225" loading="lazy">
+          {% endif %}
+        </a>
+        {% if section.settings.text != blank %}<p>{{ section.settings.text }}</p>{% endif %}
+      </div>
+
+      {% for block in section.blocks %}
+        {% case block.type %}
+          {% when 'link_column' %}
+            <div {{ block.shopify_attributes }}>
+              <h3>{{ block.settings.heading }}</h3>
+              <div class="bababo-footer-links">
+                {% if block.settings.link_1_label != blank %}<a href="{{ block.settings.link_1_url }}">{{ block.settings.link_1_label }}</a>{% endif %}
+                {% if block.settings.link_2_label != blank %}<a href="{{ block.settings.link_2_url }}">{{ block.settings.link_2_label }}</a>{% endif %}
+                {% if block.settings.link_3_label != blank %}<a href="{{ block.settings.link_3_url }}">{{ block.settings.link_3_label }}</a>{% endif %}
+                {% if block.settings.link_4_label != blank %}<a href="{{ block.settings.link_4_url }}">{{ block.settings.link_4_label }}</a>{% endif %}
+              </div>
+            </div>
+          {% when 'text_column' %}
+            <div {{ block.shopify_attributes }}>
+              <h3>{{ block.settings.heading }}</h3>
+              <p>{{ block.settings.text }}</p>
+            </div>
+          {% when 'badges' %}
+            <div {{ block.shopify_attributes }}>
+              <h3>{{ block.settings.heading }}</h3>
+              <div class="bababo-badges">
+                {% assign badges = block.settings.badges | split: ',' %}
+                {% for badge in badges %}
+                  <span class="bababo-badge">{{ badge | strip }}</span>
+                {% endfor %}
+              </div>
+            </div>
+        {% endcase %}
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Bababo - Rodapé",
+  "settings": [
+    { "type": "image_picker", "id": "logo", "label": "Logo" },
+    { "type": "text", "id": "logo_alt", "label": "Texto alternativo do logo", "default": "Bababo Kids" },
+    { "type": "textarea", "id": "text", "label": "Texto da marca", "default": "Loja de brinquedos, presentes infantis e produtos para bebês com uma identidade leve, colorida e afetuosa." }
+  ],
+  "blocks": [
+    {
+      "type": "link_column",
+      "name": "Coluna de links",
+      "settings": [
+        { "type": "text", "id": "heading", "label": "Título", "default": "Comprar" },
+        { "type": "text", "id": "link_1_label", "label": "Link 1 - texto", "default": "Produtos" },
+        { "type": "url", "id": "link_1_url", "label": "Link 1 - URL" },
+        { "type": "text", "id": "link_2_label", "label": "Link 2 - texto", "default": "Meninas" },
+        { "type": "url", "id": "link_2_url", "label": "Link 2 - URL" },
+        { "type": "text", "id": "link_3_label", "label": "Link 3 - texto", "default": "Meninos" },
+        { "type": "url", "id": "link_3_url", "label": "Link 3 - URL" },
+        { "type": "text", "id": "link_4_label", "label": "Link 4 - texto", "default": "Bebês" },
+        { "type": "url", "id": "link_4_url", "label": "Link 4 - URL" }
+      ]
+    },
+    {
+      "type": "text_column",
+      "name": "Coluna de texto",
+      "settings": [
+        { "type": "text", "id": "heading", "label": "Título", "default": "Atendimento" },
+        { "type": "textarea", "id": "text", "label": "Texto", "default": "Trocas, envio e suporte podem ser configurados nas políticas da Shopify." }
+      ]
+    },
+    {
+      "type": "badges",
+      "name": "Selos",
+      "settings": [
+        { "type": "text", "id": "heading", "label": "Título", "default": "Pagamento" },
+        { "type": "text", "id": "badges", "label": "Selos separados por vírgula", "default": "PIX, Cartão, Boleto, Shopify" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Bababo - Rodapé",
+      "blocks": [
+        { "type": "link_column" },
+        { "type": "text_column" },
+        { "type": "badges" }
+      ]
+    }
+  ]
+}
+{% endschema %}

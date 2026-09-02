@@ -1,0 +1,47 @@
+{{ 'bababo-editable.css' | asset_url | stylesheet_tag }}
+
+<section class="bababo-section" style="background: {{ section.settings.background }}; padding: {{ section.settings.padding_top }}px 0 {{ section.settings.padding_bottom }}px;">
+  <div class="bababo-shell">
+    <div class="bababo-proof-grid" style="--bababo-columns: {{ section.settings.columns }};">
+      {% for block in section.blocks %}
+        <div class="bababo-card bababo-proof-item" {{ block.shopify_attributes }}>
+          <b>{{ block.settings.value }}</b>
+          <span>{{ block.settings.label }}</span>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Bababo - Métricas",
+  "settings": [
+    { "type": "range", "id": "columns", "label": "Colunas no desktop", "min": 2, "max": 4, "step": 1, "default": 4 },
+    { "type": "color", "id": "background", "label": "Fundo", "default": "#ffffff" },
+    { "type": "range", "id": "padding_top", "label": "Espaço superior", "min": 0, "max": 100, "step": 4, "unit": "px", "default": 20 },
+    { "type": "range", "id": "padding_bottom", "label": "Espaço inferior", "min": 0, "max": 100, "step": 4, "unit": "px", "default": 20 }
+  ],
+  "blocks": [
+    {
+      "type": "metric",
+      "name": "Métrica",
+      "settings": [
+        { "type": "text", "id": "value", "label": "Valor", "default": "4.6★" },
+        { "type": "text", "id": "label", "label": "Descrição", "default": "Avaliação da loja na Shopee" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Bababo - Métricas",
+      "blocks": [
+        { "type": "metric", "settings": { "value": "4.6★", "label": "Avaliação da loja na Shopee" } },
+        { "type": "metric", "settings": { "value": "26", "label": "Seguidores e marca em crescimento" } },
+        { "type": "metric", "settings": { "value": "3", "label": "Categorias principais: meninas, meninos e bebês" } },
+        { "type": "metric", "settings": { "value": "BR", "label": "Loja pronta para vender pelo Shopify" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

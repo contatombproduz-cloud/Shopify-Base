@@ -1,0 +1,35 @@
+<section class="toy-content-section toy-about">
+  <div class="page-width">
+    <div class="toy-content-heading" data-toy-reveal><p>{{ section.settings.kicker | escape }}</p><h2>{{ section.settings.heading | escape }}</h2><div>{{ section.settings.text }}</div></div>
+    <div class="toy-value-grid">
+      {% for block in section.blocks %}
+        <article class="toy-value-card" data-toy-reveal {{ block.shopify_attributes }} style="--card-color:{{ block.settings.color }}">
+          <span aria-hidden="true">{{ block.settings.icon }}</span>
+          <h3>{{ block.settings.heading | escape }}</h3>
+          <p>{{ block.settings.text | escape }}</p>
+        </article>
+      {% endfor %}
+    </div>
+    <div class="toy-story-path" data-toy-reveal>
+      <div><strong>1</strong><span>Escolha com carinho</span></div><i></i><div><strong>2</strong><span>Prepare a surpresa</span></div><i></i><div><strong>3</strong><span>Crie novas memórias</span></div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Página infantil - Sobre",
+  "settings": [
+    { "type": "text", "id": "kicker", "label": "Chamada", "default": "Nosso jeito de brincar" },
+    { "type": "text", "id": "heading", "label": "Título", "default": "Diversão com propósito" },
+    { "type": "richtext", "id": "text", "label": "Texto", "default": "<p>Selecionamos brinquedos que estimulam criatividade, movimento e bons momentos em família.</p>" }
+  ],
+  "blocks": [{ "type": "value", "name": "Valor", "settings": [
+    { "type": "text", "id": "icon", "label": "Emoji", "default": "💡" },
+    { "type": "text", "id": "heading", "label": "Título", "default": "Imaginação" },
+    { "type": "textarea", "id": "text", "label": "Texto", "default": "Brincar abre portas para novas ideias." },
+    { "type": "color", "id": "color", "label": "Cor", "default": "#ffd84d" }
+  ] }],
+  "presets": [{ "name": "Página infantil - Sobre", "blocks": [{"type":"value"},{"type":"value"},{"type":"value"}] }]
+}
+{% endschema %}

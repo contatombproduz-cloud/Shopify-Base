@@ -1,0 +1,85 @@
+{{ 'toy-store.css' | asset_url | stylesheet_tag }}
+
+<section class="toy-discovery" style="--toy-section-bg: {{ section.settings.background }};">
+  <div class="toy-shell">
+    <div class="toy-category-row" role="list" aria-label="Categorias em destaque">
+      {% for block in section.blocks %}
+        {% if block.type == 'category' %}
+          <a class="toy-category" href="{{ block.settings.link | default: routes.all_products_collection_url }}" role="listitem" {{ block.shopify_attributes }}>
+            <span class="toy-category__media" style="--bubble: {{ block.settings.color }}">
+              {% if block.settings.image != blank %}
+                {{ block.settings.image | image_url: width: 260 | image_tag: loading: 'lazy', widths: '120, 180, 260', alt: block.settings.label }}
+              {% else %}
+                <i aria-hidden="true">{{ block.settings.emoji }}</i>
+              {% endif %}
+            </span>
+            <strong>{{ block.settings.label | escape }}</strong>
+          </a>
+        {% endif %}
+      {% endfor %}
+    </div>
+
+    <div class="toy-section-heading">
+      <h2>{{ section.settings.heading | escape }}</h2>
+      <a href="{{ section.settings.link | default: routes.all_products_collection_url }}">{{ section.settings.link_label | escape }} <span>›</span></a>
+    </div>
+
+    <div class="toy-brand-grid" role="list">
+      {% for block in section.blocks %}
+        {% if block.type == 'brand' %}
+          <a class="toy-brand" href="{{ block.settings.link | default: routes.all_products_collection_url }}" role="listitem" {{ block.shopify_attributes }}>
+            <span class="toy-brand__logo" style="--brand-color: {{ block.settings.color }}">
+              {% if block.settings.image != blank %}
+                {{ block.settings.image | image_url: width: 360 | image_tag: loading: 'lazy', widths: '160, 240, 360', alt: block.settings.name }}
+              {% else %}
+                {{ block.settings.name | escape }}
+              {% endif %}
+            </span>
+            <strong>{{ block.settings.tagline | escape }}</strong>
+            <small>{{ block.settings.offer | escape }}</small>
+          </a>
+        {% endif %}
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Loja infantil - Descobrir",
+  "tag": "section",
+  "class": "toy-home-section",
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Título", "default": "Marcas mais desejadas" },
+    { "type": "text", "id": "link_label", "label": "Texto do link", "default": "ver todas" },
+    { "type": "url", "id": "link", "label": "Link" },
+    { "type": "color", "id": "background", "label": "Fundo", "default": "#faf8fb" }
+  ],
+  "blocks": [
+    {
+      "type": "category",
+      "name": "Categoria circular",
+      "settings": [
+        { "type": "image_picker", "id": "image", "label": "Imagem" },
+        { "type": "text", "id": "emoji", "label": "Emoji alternativo", "default": "🧸" },
+        { "type": "text", "id": "label", "label": "Nome", "default": "Brinquedos" },
+        { "type": "url", "id": "link", "label": "Link" },
+        { "type": "color", "id": "color", "label": "Cor do círculo", "default": "#eee7ff" }
+      ]
+    },
+    {
+      "type": "brand",
+      "name": "Card de marca",
+      "settings": [
+        { "type": "image_picker", "id": "image", "label": "Logo" },
+        { "type": "text", "id": "name", "label": "Nome alternativo", "default": "Brinca+" },
+        { "type": "text", "id": "tagline", "label": "Chamada", "default": "Imaginação sem fim" },
+        { "type": "text", "id": "offer", "label": "Complemento", "default": "Novidades toda semana" },
+        { "type": "url", "id": "link", "label": "Link" },
+        { "type": "color", "id": "color", "label": "Cor do nome", "default": "#6844aa" }
+      ]
+    }
+  ],
+  "presets": [{ "name": "Loja infantil - Descobrir" }]
+}
+{% endschema %}

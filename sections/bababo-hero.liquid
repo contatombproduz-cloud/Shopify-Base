@@ -1,0 +1,90 @@
+{{ 'bababo-editable.css' | asset_url | stylesheet_tag }}
+
+<section class="bababo-section bababo-page-bg bababo-hero" style="--bababo-pad-top: {{ section.settings.padding_top }}px; --bababo-pad-bottom: {{ section.settings.padding_bottom }}px;">
+  <div class="bababo-shell">
+    <div class="bababo-hero-grid">
+      <div>
+        {% if section.settings.kicker != blank %}
+          <span class="bababo-kicker">{{ section.settings.kicker }}</span>
+        {% endif %}
+        <h1>{{ section.settings.heading }} <span>{{ section.settings.highlight }}</span></h1>
+        {% if section.settings.text != blank %}
+          <p>{{ section.settings.text }}</p>
+        {% endif %}
+        <div class="bababo-actions">
+          {% if section.settings.primary_label != blank %}
+            <a class="bababo-button" href="{{ section.settings.primary_link }}">{{ section.settings.primary_label }}</a>
+          {% endif %}
+          {% if section.settings.secondary_label != blank %}
+            <a class="bababo-button bababo-button--secondary" href="{{ section.settings.secondary_link }}">{{ section.settings.secondary_label }}</a>
+          {% endif %}
+        </div>
+      </div>
+
+      <div class="bababo-hero-media {% if section.settings.media_style == 'banner' %}bababo-hero-media--banner{% endif %}">
+        {% for block in section.blocks %}
+          {% case block.type %}
+            {% when 'badge' %}
+              <span class="bababo-bubble {% if forloop.index == 1 %}bababo-bubble--one{% else %}bababo-bubble--two{% endif %}" {{ block.shopify_attributes }}>{{ block.settings.text }}</span>
+          {% endcase %}
+        {% endfor %}
+        {% if section.settings.image != blank %}
+          {{ section.settings.image | image_url: width: 900 | image_tag: loading: 'eager', alt: section.settings.image_alt }}
+        {% elsif section.settings.media_style == 'banner' %}
+          <img src="{{ 'bababo-hero-toys.png' | asset_url }}" alt="{{ section.settings.image_alt }}" width="1536" height="1024" loading="eager">
+        {% else %}
+          <img src="{{ 'bababo-logo-large.png' | asset_url }}" alt="{{ section.settings.image_alt }}" width="900" height="560" loading="eager">
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Bababo - Hero",
+  "settings": [
+    { "type": "text", "id": "kicker", "label": "Etiqueta", "default": "⭐ Loja Bababo Kids" },
+    { "type": "text", "id": "heading", "label": "Título", "default": "Brinquedos que viram" },
+    { "type": "text", "id": "highlight", "label": "Destaque do título", "default": "memórias" },
+    { "type": "textarea", "id": "text", "label": "Texto", "default": "A Bababo Kids reúne brinquedos, mordedores, carrinhos e presentes infantis em uma loja alegre, confiável e pronta para crescer na Shopify." },
+    {
+      "type": "select",
+      "id": "media_style",
+      "label": "Estilo da imagem",
+      "options": [
+        { "value": "banner", "label": "Banner de brinquedos" },
+        { "value": "logo", "label": "Logo em destaque" }
+      ],
+      "default": "banner"
+    },
+    { "type": "image_picker", "id": "image", "label": "Imagem principal" },
+    { "type": "text", "id": "image_alt", "label": "Texto alternativo da imagem", "default": "Logo Bababo Kids" },
+    { "type": "text", "id": "primary_label", "label": "Texto do botão principal", "default": "Comprar brinquedos" },
+    { "type": "url", "id": "primary_link", "label": "Link do botão principal" },
+    { "type": "text", "id": "secondary_label", "label": "Texto do botão secundário", "default": "Ver linha bebê" },
+    { "type": "url", "id": "secondary_link", "label": "Link do botão secundário" },
+    { "type": "range", "id": "padding_top", "label": "Espaço superior", "min": 20, "max": 120, "step": 4, "unit": "px", "default": 64 },
+    { "type": "range", "id": "padding_bottom", "label": "Espaço inferior", "min": 20, "max": 120, "step": 4, "unit": "px", "default": 40 }
+  ],
+  "blocks": [
+    {
+      "type": "badge",
+      "name": "Selo flutuante",
+      "limit": 2,
+      "settings": [
+        { "type": "text", "id": "text", "label": "Texto", "default": "4.6★" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Bababo - Hero",
+      "blocks": [
+        { "type": "badge", "settings": { "text": "4.6★" } },
+        { "type": "badge", "settings": { "text": "26 seguidores" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

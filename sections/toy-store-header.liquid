@@ -1,0 +1,98 @@
+{{ 'toy-store.css' | asset_url | stylesheet_tag }}
+
+<header class="toy-header" data-toy-header>
+  <div class="toy-shell toy-header__inner">
+    <button class="toy-round-button toy-menu-trigger" type="button" aria-label="Abrir menu" aria-controls="ToyDrawer-{{ section.id }}" aria-expanded="false" data-toy-menu-open>
+      <span></span><span></span><span></span>
+    </button>
+
+    <a class="toy-logo" href="{{ routes.root_url }}" aria-label="{{ shop.name | escape }}">
+      {% if section.settings.logo != blank %}
+        {{ section.settings.logo | image_url: width: 280 | image_tag: loading: 'eager', widths: '140, 210, 280', alt: shop.name }}
+      {% else %}
+        <span class="toy-logo__word"><i>B</i><i>r</i><i>i</i><i>n</i><i>c</i><i>a</i><i>!</i></span>
+      {% endif %}
+    </a>
+
+    <form class="toy-search" action="{{ routes.search_url }}" method="get" role="search">
+      <label class="visually-hidden" for="ToySearch-{{ section.id }}">Pesquisar produtos</label>
+      <input id="ToySearch-{{ section.id }}" type="search" name="q" value="{{ search.terms | escape }}" placeholder="{{ section.settings.search_placeholder | escape }}">
+      <button type="submit" aria-label="Pesquisar">{% render 'icon', name: 'search' %}</button>
+    </form>
+
+    <div class="toy-header__actions">
+      <a class="toy-round-button" href="{{ routes.account_url }}" aria-label="Minha conta">{% render 'icon', name: 'account' %}</a>
+      <a class="toy-round-button toy-cart-button" href="{{ routes.cart_url }}" aria-label="Carrinho com {{ cart.item_count }} itens">
+        {% render 'icon', name: 'cart' %}
+        {% if cart.item_count > 0 %}<span>{{ cart.item_count }}</span>{% endif %}
+      </a>
+    </div>
+  </div>
+</header>
+
+<div class="toy-drawer-layer" data-toy-drawer-layer hidden>
+  <button class="toy-drawer-overlay" type="button" aria-label="Fechar menu" data-toy-menu-close></button>
+  <aside id="ToyDrawer-{{ section.id }}" class="toy-drawer" aria-label="Menu principal" aria-hidden="true" tabindex="-1" data-toy-drawer>
+    <div class="toy-drawer__head">
+      <a class="toy-drawer__account" href="{{ routes.account_url }}">
+        {% render 'icon', name: 'account' %}<strong>{{ section.settings.account_label | escape }}</strong>
+      </a>
+      <button class="toy-drawer__close" type="button" aria-label="Fechar menu" data-toy-menu-close>{% render 'icon', name: 'close' %}</button>
+    </div>
+
+    <a class="toy-delivery" href="{{ section.settings.delivery_link | default: routes.root_url }}">
+      <span aria-hidden="true">●</span><span>Entregar em: <strong>{{ section.settings.postcode | escape }}</strong></span>
+    </a>
+
+    <nav class="toy-drawer__nav" aria-label="Navegação da loja">
+      <a href="{{ routes.root_url }}"><span aria-hidden="true">⌂</span>Início</a>
+      <a href="{{ routes.account_url }}"><span aria-hidden="true">▣</span>Pedidos</a>
+      <a href="{{ section.settings.help_link | default: routes.root_url }}"><span aria-hidden="true">●</span>Ajuda</a>
+      <a href="{{ section.settings.stores_link | default: routes.root_url }}"><span aria-hidden="true">▥</span>Lojas</a>
+      <a href="{{ section.settings.fun_link | default: routes.root_url }}"><span aria-hidden="true">◐</span>Conteúdos</a>
+      <a href="{{ section.settings.business_link | default: routes.root_url }}"><span aria-hidden="true">■</span>Para Empresas</a>
+    </nav>
+
+    <div class="toy-drawer__divider"></div>
+    <nav class="toy-drawer__nav toy-drawer__nav--categories" aria-label="Categorias">
+      {% for block in section.blocks %}
+        <a href="{{ block.settings.link | default: routes.all_products_collection_url }}" {{ block.shopify_attributes }}>
+          <span aria-hidden="true">{{ block.settings.icon }}</span>{{ block.settings.label | escape }}
+          {% if block.settings.chevron %}<b aria-hidden="true">›</b>{% endif %}
+        </a>
+      {% endfor %}
+    </nav>
+  </aside>
+</div>
+
+{% schema %}
+{
+  "name": "Loja infantil - Cabeçalho",
+  "tag": "section",
+  "class": "toy-home-section",
+  "settings": [
+    { "type": "image_picker", "id": "logo", "label": "Logo" },
+    { "type": "text", "id": "search_placeholder", "label": "Texto da busca", "default": "Encontre aqui um mundo de diversão..." },
+    { "type": "text", "id": "account_label", "label": "Chamada da conta", "default": "Olá! Acesse sua conta" },
+    { "type": "text", "id": "postcode", "label": "CEP exibido", "default": "Digite seu CEP" },
+    { "type": "url", "id": "delivery_link", "label": "Link de entrega" },
+    { "type": "url", "id": "help_link", "label": "Link de ajuda" },
+    { "type": "url", "id": "stores_link", "label": "Link de lojas" },
+    { "type": "url", "id": "fun_link", "label": "Link de conteúdos" },
+    { "type": "url", "id": "business_link", "label": "Link para empresas" }
+  ],
+  "blocks": [
+    {
+      "type": "category",
+      "name": "Categoria do menu",
+      "settings": [
+        { "type": "text", "id": "icon", "label": "Ícone ou emoji", "default": "★" },
+        { "type": "text", "id": "label", "label": "Nome", "default": "Brinquedos" },
+        { "type": "url", "id": "link", "label": "Link" },
+        { "type": "checkbox", "id": "chevron", "label": "Mostrar seta", "default": true }
+      ]
+    }
+  ],
+  "presets": [{ "name": "Loja infantil - Cabeçalho" }]
+}
+{% endschema %}

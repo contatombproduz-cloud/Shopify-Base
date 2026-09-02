@@ -1,0 +1,88 @@
+{{ 'bababo-editable.css' | asset_url | stylesheet_tag }}
+
+<section class="bababo-section" style="background: {{ section.settings.background }}; padding: {{ section.settings.padding_top }}px 0 {{ section.settings.padding_bottom }}px;">
+  <div class="bababo-shell">
+    <div class="bababo-heading">
+      <div>
+        <h2>{{ section.settings.heading }}</h2>
+        {% if section.settings.subheading != blank %}<p>{{ section.settings.subheading }}</p>{% endif %}
+      </div>
+      {% if section.settings.link_label != blank %}<a href="{{ section.settings.link_url }}">{{ section.settings.link_label }}</a>{% endif %}
+    </div>
+
+    <div class="bababo-scroll-row">
+      {% for block in section.blocks %}
+        <a class="bababo-card bababo-category-card" href="{{ block.settings.link }}" style="--bababo-tile-color: {{ block.settings.color }};" {{ block.shopify_attributes }}>
+          <span>
+            {% if block.settings.image != blank %}
+              <div class="bababo-category-image">
+                {{ block.settings.image | image_url: width: 520 | image_tag: loading: 'lazy', alt: block.settings.title }}
+              </div>
+            {% elsif block.settings.default_asset != blank and block.settings.default_asset != 'none' %}
+              <div class="bababo-category-image">
+                <img src="{{ block.settings.default_asset | asset_url }}" alt="{{ block.settings.title }}" width="520" height="520" loading="lazy">
+              </div>
+            {% else %}
+              <i>{{ block.settings.icon }}</i>
+            {% endif %}
+            <strong>{{ block.settings.title }}</strong>
+            {% if block.settings.caption != blank %}<small>{{ block.settings.caption }}</small>{% endif %}
+          </span>
+        </a>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Bababo - Categorias",
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Título", "default": "Categorias favoritas" },
+    { "type": "textarea", "id": "subheading", "label": "Subtítulo", "default": "Organize a loja por linhas simples para meninas, meninos e bebês." },
+    { "type": "text", "id": "link_label", "label": "Texto do link", "default": "ver tudo" },
+    { "type": "url", "id": "link_url", "label": "Link" },
+    { "type": "color", "id": "background", "label": "Fundo", "default": "#ffffff" },
+    { "type": "range", "id": "padding_top", "label": "Espaço superior", "min": 0, "max": 100, "step": 4, "unit": "px", "default": 32 },
+    { "type": "range", "id": "padding_bottom", "label": "Espaço inferior", "min": 0, "max": 100, "step": 4, "unit": "px", "default": 24 }
+  ],
+  "blocks": [
+    {
+      "type": "category",
+      "name": "Categoria",
+      "settings": [
+        { "type": "text", "id": "icon", "label": "Ícone", "default": "🎀" },
+        { "type": "image_picker", "id": "image", "label": "Imagem da categoria" },
+        {
+          "type": "select",
+          "id": "default_asset",
+          "label": "Imagem Bababo pronta",
+          "options": [
+            { "value": "none", "label": "Nenhuma" },
+            { "value": "bababo-category-girls.png", "label": "Meninas" },
+            { "value": "bababo-category-boys.png", "label": "Meninos" },
+            { "value": "bababo-category-babies.png", "label": "Bebês e mordedores" }
+          ],
+          "default": "none"
+        },
+        { "type": "text", "id": "title", "label": "Título", "default": "Meninas" },
+        { "type": "text", "id": "caption", "label": "Descrição curta", "default": "Brincar, criar e imaginar" },
+        { "type": "url", "id": "link", "label": "Link" },
+        { "type": "color", "id": "color", "label": "Cor do círculo", "default": "#ffe1ef" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Bababo - Categorias",
+      "blocks": [
+        { "type": "category", "settings": { "icon": "🎀", "default_asset": "bababo-category-girls.png", "title": "Meninas", "caption": "Brincar, criar e imaginar", "color": "#ffe1ef" } },
+        { "type": "category", "settings": { "icon": "🚀", "default_asset": "bababo-category-boys.png", "title": "Meninos", "caption": "Ação e aventura", "color": "#dff0ff" } },
+        { "type": "category", "settings": { "icon": "🍼", "default_asset": "bababo-category-babies.png", "title": "Bebês", "caption": "Mordedores e cuidado", "color": "#dff9e7" } },
+        { "type": "category", "settings": { "icon": "🦖", "default_asset": "bababo-category-babies.png", "title": "Mordedores", "caption": "Dino e silicone", "color": "#fff4c5" } },
+        { "type": "category", "settings": { "icon": "🚗", "title": "Carrinhos", "caption": "Colecionáveis", "color": "#efe0ff" } }
+      ]
+    }
+  ]
+}
+{% endschema %}
