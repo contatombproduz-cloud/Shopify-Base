@@ -34,11 +34,13 @@
       this.querySelector('[data-game-start]')?.addEventListener('click', () => this.start());
       this.querySelector('[data-game-retry]')?.addEventListener('click', () => this.start());
       this.querySelector('[data-game-close]')?.addEventListener('click', () => this.close());
-      this.stage?.addEventListener('pointerdown', (event) => {
+      this.stagePressEvent = window.PointerEvent ? 'pointerdown' : 'touchstart';
+      this.onStagePress = (event) => {
         if (!this.active || event.target.closest('button, a')) return;
         event.preventDefault();
         this.flap();
-      });
+      };
+      this.stage?.addEventListener(this.stagePressEvent, this.onStagePress, { passive: false });
       this.stage?.addEventListener('keydown', (event) => {
         if (!['Space', 'ArrowUp'].includes(event.code)) return;
         event.preventDefault();
@@ -46,7 +48,12 @@
         else if (!this.panel.hidden && !this.startScreen.hidden) this.start();
       });
       this.onResize = () => {
-        if (this.active) this.finish(false);
+        window.clearTimeout(this.resizeTimer);
+        this.resizeTimer = window.setTimeout(() => {
+          if (!this.active) return;
+          const currentWidth = this.stage.getBoundingClientRect().width;
+          if (Math.abs(currentWidth - this.stageWidth) > 32) this.finish(false);
+        }, 180);
       };
       window.addEventListener('resize', this.onResize, { passive: true });
     }
@@ -54,6 +61,7 @@
     disconnectedCallback() {
       this.stopLoop();
       window.removeEventListener('resize', this.onResize);
+      this.stage?.removeEventListener(this.stagePressEvent, this.onStagePress);
     }
 
     open() {
@@ -107,7 +115,11 @@
       this.lastFrame = performance.now();
       this.accumulator = 0;
       this.live.textContent = `O voo começou. Atravesse ${this.goal} portais de nuvens.`;
-      this.stage.focus({ preventScroll: true });
+      try {
+        this.stage.focus({ preventScroll: true });
+      } catch (error) {
+        this.stage.focus();
+      }
       this.flap();
       this.hintTimer = window.setTimeout(() => { this.hint.hidden = true; }, 1800);
       this.frame = requestAnimationFrame((time) => this.update(time));
@@ -279,12 +291,13 @@
 
     clearObstacles() {
       this.obstacles = [];
-      this.obstacleLayer.replaceChildren();
+      this.obstacleLayer.textContent = '';
     }
 
     stopLoop() {
       cancelAnimationFrame(this.frame);
       window.clearTimeout(this.hintTimer);
+      window.clearTimeout(this.resizeTimer);
     }
   }
 

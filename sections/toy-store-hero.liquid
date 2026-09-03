@@ -1,6 +1,6 @@
 {{ 'toy-store.css' | asset_url | stylesheet_tag }}
 
-<section class="toy-hero-wrap toy-hero-wrap--cinematic" data-toy-parallax-section data-toy-video-scrub data-toy-scrub-seconds="{{ section.settings.scroll_seconds }}" style="--toy-hero-height: {{ section.settings.height }}px;">
+<section class="toy-hero-wrap toy-hero-wrap--cinematic" data-toy-parallax-section data-toy-video-scrub data-toy-scrub-seconds="5" style="--toy-hero-height: {{ section.settings.height }}px;">
   <div class="toy-hero__sticky">
     <div class="toy-shell">
       <div class="toy-hero toy-hero--cinematic" data-toy-tilt>
@@ -59,7 +59,6 @@
     { "type": "url", "id": "button_link", "label": "Link principal" },
     { "type": "text", "id": "secondary_label", "label": "Botão secundário", "default": "Ver novidades" },
     { "type": "url", "id": "secondary_link", "label": "Link secundário" },
-    { "type": "range", "id": "scroll_seconds", "label": "Trecho do vídeo controlado pelo scroll", "min": 3, "max": 10, "step": 1, "unit": "s", "default": 5 },
     { "type": "range", "id": "height", "label": "Altura no desktop", "min": 520, "max": 700, "step": 20, "unit": "px", "default": 640 }
   ],
   "presets": [{ "name": "Loja infantil - Hero 3D" }]

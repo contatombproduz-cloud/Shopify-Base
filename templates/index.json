@@ -120,26 +120,13 @@
     "toy_hero": {
       "type": "toy-store-hero",
       "settings": {
-<<<<<<< HEAD
         "image_alt": "Aventuras e brinquedos Bababo Kids",
         "eyebrow": "Bababo Kids apresenta",
         "heading": "Onde a imaginação",
         "highlight": "cria asas!",
         "text": "<p>Brinquedos para voar mais alto, descobrir aventuras e criar memórias em família.</p>",
         "button_label": "Explorar brinquedos", "button_link": "/collections/all",
-        "secondary_label": "Ver novidades", "secondary_link": "/collections/all", "scroll_seconds": 5, "height": 640
-=======
-        "image_alt": "Brinquedos coloridos entre nuvens em um mundo azul",
-        "eyebrow": "Diversão que chega voando",
-        "heading": "Um mundo inteiro de",
-        "highlight": "brincadeiras",
-        "text": "<p>Presentes incríveis para transformar qualquer dia em uma grande aventura.</p>",
-        "button_label": "Explorar brinquedos",
-        "button_link": "/collections/all",
-        "secondary_label": "Ver novidades",
-        "secondary_link": "/collections/all",
-        "height": 520
->>>>>>> 2d35037406a175854076a800a71defaddd8ced0a
+        "secondary_label": "Ver novidades", "secondary_link": "/collections/all", "height": 640
       }
     },
     "toy_discovery": {
@@ -343,7 +330,6 @@
         "background": "#faf8fb"
       }
     },
-<<<<<<< HEAD
     "bababo_game": {
       "type": "bababo-flight-game",
       "settings": {
@@ -359,23 +345,4 @@
     "featured": { "type": "featured-collection", "settings": { "heading": "Brinquedos que todo mundo ama", "collection": "all", "products_to_show": 8, "columns_desktop": 4, "show_view_all": true } }
   },
   "order": ["toy_header", "toy_hero", "toy_discovery", "bababo_game", "featured"]
-=======
-    "featured": {
-      "type": "featured-collection",
-      "settings": {
-        "heading": "Brinquedos que todo mundo ama",
-        "collection": "all",
-        "products_to_show": 8,
-        "columns_desktop": 4,
-        "show_view_all": true
-      }
-    }
-  },
-  "order": [
-    "toy_header",
-    "toy_hero",
-    "toy_discovery",
-    "featured"
-  ]
->>>>>>> 2d35037406a175854076a800a71defaddd8ced0a
 }

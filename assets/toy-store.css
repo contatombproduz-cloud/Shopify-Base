@@ -321,3 +321,5 @@ body:not(.template-index) .field__input:focus,body:not(.template-index) .select_
 @media(max-width:760px) and (prefers-reduced-motion:reduce){.toy-hero-wrap--cinematic{min-height:calc(650px + 135vh)}}
 .toy-hero--cinematic .toy-hero__video{transition:filter .22s ease,transform .22s ease}.toy-hero-wrap--cinematic.is-video-scrubbing .toy-hero__video{filter:saturate(1.12) contrast(1.04) brightness(1.035);transform:scale(1.006)}
 @media(prefers-reduced-motion:reduce){.toy-hero--cinematic .toy-hero__video{transition:none}.toy-hero-wrap--cinematic.is-video-scrubbing .toy-hero__video{filter:saturate(1.08) contrast(1.03);transform:none}}
+.bababo-game__stage.is-playing{touch-action:none;overscroll-behavior:contain;-webkit-user-select:none;user-select:none}
+@media(max-width:760px){.bababo-game__stage.is-playing{position:relative}.bababo-game__start .button,.bababo-game__result .button{min-height:52px;touch-action:manipulation}}
