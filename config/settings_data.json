@@ -1,6 +1,17 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "current": {
+    "logo": "shopify://shop_images/LOGO_BABABO_2.png",
     "logo_width": 120,
+    "favicon": "shopify://shop_images/IMG_1646.jpg",
     "color_background": "#ffffff",
     "color_text": "#172721",
     "color_background_contrast": "#f5f6f6",
@@ -25,7 +36,8 @@
     "cart_show_note": true,
     "social_instagram_link": "",
     "social_facebook_link": "",
-    "social_linkedin_link": ""
+    "social_linkedin_link": "",
+    "content_for_index": []
   },
   "presets": {
     "Base Liquid": {
