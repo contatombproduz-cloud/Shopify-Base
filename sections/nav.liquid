@@ -9,7 +9,7 @@
         {%- assign logo_alt = settings.logo.alt | default: shop.name | escape -%}
         {{ settings.logo | image_url: width: 600 | image_tag: class: 'shopcart-header__logo', widths: '120, 180, 240, 360, 600', width: settings.logo_width, alt: logo_alt }}
       {%- else -%}
-        <span class="toy-logo__word" aria-hidden="true"><i>B</i><i>r</i><i>i</i><i>n</i><i>c</i><i>a</i><i>!</i></span>
+        <img src="{{ 'bababo-logo.png' | asset_url }}" class="shopcart-header__logo" alt="Bababo Kids — Onde a imaginação cria asas!" width="280" height="171" loading="eager">
       {%- endif -%}
     </a>
 

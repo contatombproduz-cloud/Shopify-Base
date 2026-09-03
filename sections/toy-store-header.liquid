@@ -10,7 +10,7 @@
       {% if section.settings.logo != blank %}
         {{ section.settings.logo | image_url: width: 280 | image_tag: loading: 'eager', widths: '140, 210, 280', alt: shop.name }}
       {% else %}
-        <span class="toy-logo__word"><i>B</i><i>r</i><i>i</i><i>n</i><i>c</i><i>a</i><i>!</i></span>
+        <img src="{{ 'bababo-logo.png' | asset_url }}" alt="Bababo Kids — Onde a imaginação cria asas!" width="280" height="171" loading="eager">
       {% endif %}
     </a>
 

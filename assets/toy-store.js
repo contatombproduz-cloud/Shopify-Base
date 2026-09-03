@@ -40,32 +40,162 @@
       if (section.dataset.toyReady) return;
       section.dataset.toyReady = 'true';
       const hero = section.querySelector('[data-toy-tilt]');
-      const layers = [...section.querySelectorAll('[data-toy-parallax]')];
-      if (!hero || !layers.length || reduceMotion.matches) return;
+      if (!hero) return;
 
       let pointerX = 0, pointerY = 0, ticking = false;
+      const scrubVideo = section.hasAttribute('data-toy-video-scrub') ? section.querySelector('.toy-hero__video') : null;
+      const scrubSeconds = Math.max(.5, Number(section.dataset.toyScrubSeconds || 5));
+      let targetVideoTime = 0;
+      let videoFrame = 0;
+      let videoSeekQueued = false;
+      let videoPrimed = false;
+      let scrollIdleTimer = 0;
+      const clamp = (value, min, max) => Math.max(min, Math.min(max, value));
+      const scrub = () => {
+        videoFrame = 0;
+        if (!scrubVideo || scrubVideo.readyState < 2 || !Number.isFinite(scrubVideo.duration) || scrubVideo.duration <= 0) return;
+        if (scrubVideo.seeking) {
+          if (!videoSeekQueued) {
+            videoSeekQueued = true;
+            scrubVideo.addEventListener('seeked', () => {
+              videoSeekQueued = false;
+              if (!videoFrame) videoFrame = requestAnimationFrame(scrub);
+            }, { once: true });
+          }
+          return;
+        }
+        const current = Number.isFinite(scrubVideo.currentTime) ? scrubVideo.currentTime : 0;
+        const distance = targetVideoTime - current;
+        if (Math.abs(distance) <= .025) {
+          scrubVideo.currentTime = targetVideoTime;
+          return;
+        }
+        const step = Math.sign(distance) * Math.min(Math.abs(distance), .16);
+        scrubVideo.currentTime = clamp(current + step, 0, Math.max(0, scrubVideo.duration - .04));
+        videoSeekQueued = true;
+        scrubVideo.addEventListener('seeked', () => {
+          videoSeekQueued = false;
+          if (!videoFrame) videoFrame = requestAnimationFrame(scrub);
+        }, { once: true });
+      };
+      const primeVideo = () => {
+        if (!scrubVideo || videoPrimed) return;
+        videoPrimed = true;
+        const rememberedTime = Number.isFinite(scrubVideo.currentTime) ? scrubVideo.currentTime : 0;
+        const playback = scrubVideo.play();
+        if (!playback) return;
+        playback.then(() => {
+          scrubVideo.pause();
+          scrubVideo.currentTime = rememberedTime;
+          if (!videoFrame) videoFrame = requestAnimationFrame(scrub);
+        }).catch(() => {
+          videoPrimed = false;
+          if (!videoFrame) videoFrame = requestAnimationFrame(scrub);
+        });
+      };
+      const setVideoProgress = (progress) => {
+        if (!scrubVideo || !Number.isFinite(scrubVideo.duration) || scrubVideo.duration <= 0) return;
+        const maxVideoTime = Math.min(Math.max(0, scrubVideo.duration - .08), scrubSeconds);
+        targetVideoTime = clamp(progress * maxVideoTime, 0, maxVideoTime);
+        if (!videoFrame) videoFrame = requestAnimationFrame(scrub);
+      };
       const render = () => {
         const rect = section.getBoundingClientRect();
-        const center = rect.top + rect.height / 2;
-        const scrollProgress = Math.max(-1, Math.min(1, (window.innerHeight / 2 - center) / window.innerHeight));
-        layers.forEach((layer) => {
-          const depth = Number(layer.dataset.toyParallax || 0);
-          const travel = scrollProgress * 210;
-          layer.style.transform = `translate3d(${pointerX * depth * 34}px, ${(travel + pointerY * 28) * depth}px, ${Math.abs(depth) * 90}px) scale(${1 + Math.abs(depth) * .035})`;
-        });
-        hero.style.transform = `rotateX(${pointerY * -2.1 + scrollProgress * .8}deg) rotateY(${pointerX * 3.1}deg) translateY(${scrollProgress * -5}px)`;
+        const stickyTop = window.innerWidth <= 760 ? 8 : 18;
+        const travel = Math.max(section.offsetHeight - hero.offsetHeight - stickyTop, 1);
+        const progress = clamp((stickyTop - rect.top) / travel, 0, 1);
+        const centered = progress * 2 - 1;
+        section.style.setProperty('--toy-scroll-progress', progress.toFixed(4));
+        section.style.setProperty('--toy-scroll-center', centered.toFixed(4));
+        section.style.setProperty('--toy-pointer-x', pointerX.toFixed(4));
+        section.style.setProperty('--toy-pointer-y', pointerY.toFixed(4));
+        setVideoProgress(progress);
         ticking = false;
       };
       const requestRender = () => { if (!ticking) { ticking = true; requestAnimationFrame(render); } };
-      window.addEventListener('scroll', requestRender, { passive: true });
-      hero.addEventListener('pointermove', (event) => {
-        const rect = hero.getBoundingClientRect();
-        pointerX = (event.clientX - rect.left) / rect.width * 2 - 1;
-        pointerY = (event.clientY - rect.top) / rect.height * 2 - 1;
+      const handleScroll = () => {
+        if (scrubVideo) {
+          primeVideo();
+          section.classList.add('is-video-scrubbing');
+          window.clearTimeout(scrollIdleTimer);
+          scrollIdleTimer = window.setTimeout(() => section.classList.remove('is-video-scrubbing'), 180);
+        }
         requestRender();
-      });
-      hero.addEventListener('pointerleave', () => { pointerX = 0; pointerY = 0; requestRender(); });
+      };
+      scrubVideo?.addEventListener('loadedmetadata', requestRender, { once: true });
+      scrubVideo?.addEventListener('loadeddata', () => {
+        if (!videoFrame) videoFrame = requestAnimationFrame(scrub);
+      }, { once: true });
+      if (reduceMotion.matches && !scrubVideo) {
+        section.style.setProperty('--toy-scroll-progress', '0');
+        section.style.setProperty('--toy-scroll-center', '0');
+        return;
+      }
+      window.addEventListener('scroll', handleScroll, { passive: true });
+      window.addEventListener('resize', requestRender, { passive: true });
+      if (!reduceMotion.matches) {
+        hero.addEventListener('pointermove', (event) => {
+          const rect = hero.getBoundingClientRect();
+          pointerX = (event.clientX - rect.left) / rect.width * 2 - 1;
+          pointerY = (event.clientY - rect.top) / rect.height * 2 - 1;
+          requestRender();
+        });
+        hero.addEventListener('pointerleave', () => { pointerX = 0; pointerY = 0; requestRender(); });
+      }
       requestRender();
+    });
+  }
+
+  function initHeroVideo(root = document) {
+    root.querySelectorAll('[data-toy-parallax-section]').forEach((section) => {
+      const video = section.querySelector('.toy-hero__video');
+      const control = section.querySelector('[data-toy-video-control]');
+      if (!video || video.dataset.toyVideoReady) return;
+      video.dataset.toyVideoReady = 'true';
+      if (section.hasAttribute('data-toy-video-scrub')) {
+        video.pause();
+        video.muted = true;
+        video.playsInline = true;
+        video.preload = 'auto';
+        if (video.readyState === 0) video.load();
+        if (control) control.hidden = true;
+        return;
+      }
+      const icon = control?.querySelector('span');
+      const syncControl = () => {
+        if (!control) return;
+        const paused = video.paused;
+        control.setAttribute('aria-label', paused ? 'Reproduzir vídeo' : 'Pausar vídeo');
+        if (icon) icon.textContent = paused ? '▶' : 'Ⅱ';
+      };
+      if (reduceMotion.matches) {
+        video.pause();
+        video.dataset.userPaused = 'true';
+      } else {
+        video.play().catch(syncControl);
+      }
+      control?.addEventListener('click', () => {
+        if (video.paused) {
+          video.dataset.userPaused = 'false';
+          video.play().catch(syncControl);
+        } else {
+          video.dataset.userPaused = 'true';
+          video.pause();
+        }
+        syncControl();
+      });
+      video.addEventListener('play', syncControl);
+      video.addEventListener('pause', syncControl);
+      if ('IntersectionObserver' in window) {
+        const observer = new IntersectionObserver((entries) => {
+          entries.forEach((entry) => {
+            if (!entry.isIntersecting) video.pause();
+            else if (video.dataset.userPaused !== 'true' && !reduceMotion.matches) video.play().catch(syncControl);
+          });
+        }, { threshold: .12 });
+        observer.observe(section);
+      }
+      syncControl();
     });
   }
 
@@ -116,7 +246,7 @@
     });
   }
 
-  const init = (root = document) => { initDrawer(root); initParallax(root); initFooterParallax(root); initReveal(root); };
+  const init = (root = document) => { initDrawer(root); initHeroVideo(root); initParallax(root); initFooterParallax(root); initReveal(root); };
   document.readyState === 'loading' ? document.addEventListener('DOMContentLoaded', () => init()) : init();
   document.addEventListener('shopify:section:load', (event) => init(event.target));
 })();

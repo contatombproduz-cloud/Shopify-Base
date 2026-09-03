@@ -1,27 +1,43 @@
 {{ 'toy-store.css' | asset_url | stylesheet_tag }}
 
-<section class="toy-hero-wrap" data-toy-parallax-section style="--toy-hero-height: {{ section.settings.height }}px;">
-  <div class="toy-shell">
-    <div class="toy-hero" data-toy-tilt>
-      <div class="toy-hero__media" data-toy-parallax="0.12">
-        {% if section.settings.image != blank %}
-          {{ section.settings.image | image_url: width: 2400 | image_tag: loading: 'eager', fetchpriority: 'high', widths: '768, 1200, 1800, 2400', sizes: '(min-width: 1800px) 1600px, calc(100vw - 32px)', alt: section.settings.image_alt }}
-        {% else %}
-          <img src="{{ 'toy-store-hero-3d.png' | asset_url }}" alt="{{ section.settings.image_alt | escape }}" width="2172" height="724" loading="eager" fetchpriority="high">
-        {% endif %}
-      </div>
-      <span class="toy-hero__cloud toy-hero__cloud--one" data-toy-parallax="0.3" aria-hidden="true"></span>
-      <span class="toy-hero__cloud toy-hero__cloud--two" data-toy-parallax="-0.18" aria-hidden="true"></span>
-      <div class="toy-hero__content" data-toy-parallax="-0.06">
-        {% if section.settings.eyebrow != blank %}<p>{{ section.settings.eyebrow | escape }}</p>{% endif %}
-        <h1>{{ section.settings.heading | escape }} <strong>{{ section.settings.highlight | escape }}</strong></h1>
-        {% if section.settings.text != blank %}<div class="toy-hero__text">{{ section.settings.text }}</div>{% endif %}
-        <div class="toy-hero__buttons">
-          {% if section.settings.button_label != blank %}<a class="toy-cloud-button" href="{{ section.settings.button_link | default: routes.all_products_collection_url }}">{{ section.settings.button_label | escape }}</a>{% endif %}
-          {% if section.settings.secondary_label != blank %}<a class="toy-hero__secondary" href="{{ section.settings.secondary_link | default: routes.all_products_collection_url }}">{{ section.settings.secondary_label | escape }} <span>→</span></a>{% endif %}
+<section class="toy-hero-wrap toy-hero-wrap--cinematic" data-toy-parallax-section data-toy-video-scrub data-toy-scrub-seconds="{{ section.settings.scroll_seconds }}" style="--toy-hero-height: {{ section.settings.height }}px;">
+  <div class="toy-hero__sticky">
+    <div class="toy-shell">
+      <div class="toy-hero toy-hero--cinematic" data-toy-tilt>
+        <div class="toy-hero__atmosphere" aria-hidden="true">
+          <span class="toy-hero__orb toy-hero__orb--one"></span>
+          <span class="toy-hero__orb toy-hero__orb--two"></span>
+          <span class="toy-hero__spark toy-hero__spark--one">✦</span>
+          <span class="toy-hero__spark toy-hero__spark--two">✦</span>
+          <span class="toy-hero__spark toy-hero__spark--three">✦</span>
         </div>
+
+        <div class="toy-hero__media-frame" data-toy-parallax="0.2">
+          <div class="toy-hero__media">
+            {% if section.settings.video != blank %}
+              {{ section.settings.video | video_tag: autoplay: false, loop: false, muted: true, controls: false, playsinline: true, preload: 'auto', image_size: '2400x', class: 'toy-hero__video' }}
+            {% else %}
+              <video class="toy-hero__video" muted playsinline preload="auto" poster="{{ 'bababo-hero-poster.jpg' | asset_url }}" data-toy-hero-video>
+                <source src="{{ 'bababo-hero-video.mp4' | asset_url }}" type="video/mp4">
+              </video>
+            {% endif %}
+            <div class="toy-hero__video-shade" aria-hidden="true"></div>
+          </div>
+        </div>
+
+        <div class="toy-hero__content" data-toy-parallax="-0.14">
+          {% if section.settings.eyebrow != blank %}<p>{{ section.settings.eyebrow | escape }}</p>{% endif %}
+          <h1>{{ section.settings.heading | escape }} <strong>{{ section.settings.highlight | escape }}</strong></h1>
+          {% if section.settings.text != blank %}<div class="toy-hero__text">{{ section.settings.text }}</div>{% endif %}
+          <div class="toy-hero__buttons">
+            {% if section.settings.button_label != blank %}<a class="toy-cloud-button" href="{{ section.settings.button_link | default: routes.all_products_collection_url }}">{{ section.settings.button_label | escape }}</a>{% endif %}
+            {% if section.settings.secondary_label != blank %}<a class="toy-hero__secondary" href="{{ section.settings.secondary_link | default: routes.all_products_collection_url }}">{{ section.settings.secondary_label | escape }} <span>→</span></a>{% endif %}
+          </div>
+        </div>
+
+        <div class="toy-hero__scroll" aria-hidden="true"><span></span>role para conduzir a aventura</div>
+        <div class="toy-hero__timeline" aria-hidden="true"><span></span></div>
       </div>
-      <div class="toy-hero__scroll" aria-hidden="true"><span></span>role para brincar</div>
     </div>
   </div>
 </section>
@@ -32,17 +48,19 @@
   "tag": "section",
   "class": "toy-home-section",
   "settings": [
-    { "type": "image_picker", "id": "image", "label": "Imagem do banner (opcional)" },
+    { "type": "video", "id": "video", "label": "Vídeo da Shopify (opcional)" },
+    { "type": "image_picker", "id": "image", "label": "Capa do vídeo (opcional)" },
     { "type": "text", "id": "image_alt", "label": "Descrição da imagem", "default": "Brinquedos coloridos entre nuvens" },
-    { "type": "text", "id": "eyebrow", "label": "Chamada pequena", "default": "Diversão que chega voando" },
-    { "type": "text", "id": "heading", "label": "Título", "default": "Um mundo inteiro de" },
-    { "type": "text", "id": "highlight", "label": "Palavra em destaque", "default": "brincadeiras" },
-    { "type": "richtext", "id": "text", "label": "Texto", "default": "<p>Presentes incríveis para transformar qualquer dia em uma grande aventura.</p>" },
+    { "type": "text", "id": "eyebrow", "label": "Chamada pequena", "default": "Bababo Kids apresenta" },
+    { "type": "text", "id": "heading", "label": "Título", "default": "Onde a imaginação" },
+    { "type": "text", "id": "highlight", "label": "Palavra em destaque", "default": "cria asas!" },
+    { "type": "richtext", "id": "text", "label": "Texto", "default": "<p>Brinquedos para voar mais alto, descobrir aventuras e criar memórias em família.</p>" },
     { "type": "text", "id": "button_label", "label": "Botão principal", "default": "Explorar brinquedos" },
     { "type": "url", "id": "button_link", "label": "Link principal" },
     { "type": "text", "id": "secondary_label", "label": "Botão secundário", "default": "Ver novidades" },
     { "type": "url", "id": "secondary_link", "label": "Link secundário" },
-    { "type": "range", "id": "height", "label": "Altura no desktop", "min": 400, "max": 700, "step": 20, "unit": "px", "default": 520 }
+    { "type": "range", "id": "scroll_seconds", "label": "Trecho do vídeo controlado pelo scroll", "min": 3, "max": 10, "step": 1, "unit": "s", "default": 5 },
+    { "type": "range", "id": "height", "label": "Altura no desktop", "min": 520, "max": 700, "step": 20, "unit": "px", "default": 640 }
   ],
   "presets": [{ "name": "Loja infantil - Hero 3D" }]
 }

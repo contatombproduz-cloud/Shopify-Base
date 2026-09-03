@@ -1,0 +1,74 @@
+<bababo-flight-game class="bababo-game" data-goal="{{ section.settings.goal }}" data-code="{{ section.settings.coupon_code | escape }}">
+  <section class="bababo-game__section">
+    <div class="toy-shell bababo-game__shell">
+      <div class="bababo-game__intro" data-toy-reveal>
+        <div class="bababo-game__copy">
+          <p>{{ section.settings.kicker | escape }}</p>
+          <h2>{{ section.settings.heading | escape }}</h2>
+          <div>{{ section.settings.text }}</div>
+          <button class="toy-cloud-button bababo-game__open" type="button" data-game-open>{{ section.settings.button_label | escape }}</button>
+          <small>Desafio gratuito. Nenhuma compra é necessária para jogar.</small>
+        </div>
+        <div class="bababo-game__mascot" aria-hidden="true" data-toy-parallax="0.18">
+          <span>+{{ section.settings.discount_label | escape }}</span>
+          <img src="{{ 'bababo-bird-mascot.png' | asset_url }}" alt="" width="520" height="520" loading="lazy">
+        </div>
+      </div>
+
+      <div class="bababo-game__panel" data-game-panel hidden>
+        <div class="bababo-game__hud">
+          <p><span aria-hidden="true">⭐</span> Portais: <strong data-game-score>0</strong>/<b>{{ section.settings.goal }}</b></p>
+          <p><span aria-hidden="true">🏆</span> Melhor voo: <strong data-game-best>0</strong></p>
+          <button type="button" data-game-close aria-label="Fechar jogo">×</button>
+        </div>
+        <div class="bababo-game__stage" data-game-stage tabindex="0" role="application" aria-label="Voo da Imaginação. Toque, clique ou pressione Espaço para bater asas e atravessar os portais de nuvens.">
+          <div class="bababo-game__sky" aria-hidden="true"><span></span><span></span></div>
+          <div class="bababo-game__obstacles" data-game-obstacles aria-hidden="true"></div>
+          <div class="bababo-game__bird" data-game-bird hidden aria-hidden="true">
+            <img class="bababo-game__bird-frame bababo-game__bird-frame--up" src="{{ 'bababo-bird-mascot.png' | asset_url }}" alt="" width="160" height="160">
+            <img class="bababo-game__bird-frame bababo-game__bird-frame--mid" src="{{ 'bababo-bird-frame-mid.png' | asset_url }}" alt="" width="160" height="160">
+            <img class="bababo-game__bird-frame bababo-game__bird-frame--down" src="{{ 'bababo-bird-frame-down.png' | asset_url }}" alt="" width="160" height="160">
+          </div>
+          <div class="bababo-game__tap-hint" data-game-hint hidden aria-hidden="true"><span>☝️</span> Toque para voar</div>
+          <div class="bababo-game__start" data-game-start-screen>
+            <span aria-hidden="true">🪽</span>
+            <h3>Pronto para voar?</h3>
+            <p>Toque, clique ou pressione Espaço para bater asas. Atravesse {{ section.settings.goal }} portais de nuvens sem encostar.</p>
+            <button class="button" type="button" data-game-start>Começar aventura</button>
+          </div>
+          <div class="bababo-game__result" data-game-result hidden aria-live="polite">
+            <span data-game-result-icon aria-hidden="true">🎉</span>
+            <h3 data-game-result-title>Você ganhou!</h3>
+            <p data-game-result-text>A imaginação criou asas.</p>
+            <div class="bababo-game__coupon" data-game-coupon-wrap hidden>
+              <span>Seu cupom</span><strong data-game-coupon>{{ section.settings.coupon_code | escape }}</strong>
+              <a class="button" href="/discount/{{ section.settings.coupon_code | url_encode }}?redirect=/collections/all">Aplicar e escolher brinquedos</a>
+            </div>
+            <button class="bababo-game__retry" type="button" data-game-retry>Voar novamente</button>
+          </div>
+        </div>
+        <p class="visually-hidden" aria-live="polite" data-game-live></p>
+      </div>
+    </div>
+  </section>
+</bababo-flight-game>
+
+<script src="{{ 'bababo-flight-game.js' | asset_url }}" defer="defer"></script>
+
+{% schema %}
+{
+  "name": "Bababo - Jogo do voo",
+  "tag": "section",
+  "class": "toy-home-section",
+  "settings": [
+    { "type": "text", "id": "kicker", "label": "Chamada", "default": "Desafio da imaginação" },
+    { "type": "text", "id": "heading", "label": "Título", "default": "Ajude a imaginação a criar asas!" },
+    { "type": "richtext", "id": "text", "label": "Texto", "default": "<p>Faça o passarinho voar entre as nuvens e desbloqueie uma surpresa para sua próxima aventura.</p>" },
+    { "type": "text", "id": "button_label", "label": "Texto do botão", "default": "Jogar e ganhar surpresa" },
+    { "type": "text", "id": "discount_label", "label": "Selo do prêmio", "default": "10% OFF" },
+    { "type": "text", "id": "coupon_code", "label": "Código do cupom", "info": "Crie o mesmo código em Descontos no admin da Shopify.", "default": "ASAS10" },
+    { "type": "range", "id": "goal", "label": "Portais para vencer", "min": 3, "max": 15, "step": 1, "default": 7 }
+  ],
+  "presets": [{ "name": "Bababo - Jogo do voo" }]
+}
+{% endschema %}

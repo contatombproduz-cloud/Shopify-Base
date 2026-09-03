@@ -19,13 +19,13 @@
     "toy_hero": {
       "type": "toy-store-hero",
       "settings": {
-        "image_alt": "Brinquedos coloridos entre nuvens em um mundo azul",
-        "eyebrow": "Diversão que chega voando",
-        "heading": "Um mundo inteiro de",
-        "highlight": "brincadeiras",
-        "text": "<p>Presentes incríveis para transformar qualquer dia em uma grande aventura.</p>",
+        "image_alt": "Aventuras e brinquedos Bababo Kids",
+        "eyebrow": "Bababo Kids apresenta",
+        "heading": "Onde a imaginação",
+        "highlight": "cria asas!",
+        "text": "<p>Brinquedos para voar mais alto, descobrir aventuras e criar memórias em família.</p>",
         "button_label": "Explorar brinquedos", "button_link": "/collections/all",
-        "secondary_label": "Ver novidades", "secondary_link": "/collections/all", "height": 520
+        "secondary_label": "Ver novidades", "secondary_link": "/collections/all", "scroll_seconds": 5, "height": 640
       }
     },
     "toy_discovery": {
@@ -53,7 +53,19 @@
       "block_order": ["cat_games", "cat_blocks", "cat_action", "cat_plush", "cat_games2", "cat_sale", "cat_import", "cat_new", "cat_dolls", "cat_cars", "brand_one", "brand_two", "brand_three", "brand_four", "brand_five", "brand_six", "brand_seven", "brand_eight"],
       "settings": { "heading": "Marcas mais desejadas", "link_label": "ver todas", "link": "/collections/all", "background": "#faf8fb" }
     },
+    "bababo_game": {
+      "type": "bababo-flight-game",
+      "settings": {
+        "kicker": "Desafio da imaginação",
+        "heading": "Ajude a imaginação a criar asas!",
+        "text": "<p>Faça o passarinho voar entre as nuvens e desbloqueie uma surpresa para sua próxima aventura.</p>",
+        "button_label": "Jogar e ganhar surpresa",
+        "discount_label": "10% OFF",
+        "coupon_code": "ASAS10",
+        "goal": 7
+      }
+    },
     "featured": { "type": "featured-collection", "settings": { "heading": "Brinquedos que todo mundo ama", "collection": "all", "products_to_show": 8, "columns_desktop": 4, "show_view_all": true } }
   },
-  "order": ["toy_header", "toy_hero", "toy_discovery", "featured"]
+  "order": ["toy_header", "toy_hero", "toy_discovery", "bababo_game", "featured"]
 }

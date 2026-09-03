@@ -27,7 +27,7 @@
         {% if section.settings.logo != blank %}
           {{ section.settings.logo | image_url: width: 320 | image_tag: loading: 'lazy', widths: '160, 240, 320', alt: shop.name }}
         {% else %}
-          <span class="toy-logo__word"><i>B</i><i>r</i><i>i</i><i>n</i><i>c</i><i>a</i><i>!</i></span>
+          <img src="{{ 'bababo-logo.png' | asset_url }}" alt="Bababo Kids — Onde a imaginação cria asas!" width="280" height="171" loading="lazy">
         {% endif %}
         <p>{{ section.settings.brand_text | escape }}</p>
         {% if section.settings.show_social %}
@@ -68,7 +68,7 @@
     </div>
 
     <div class="toy-footer__bottom">
-      <p>&copy; {{ 'now' | date: '%Y' }} {{ shop.name }}. Feito para brincar, imaginar e crescer.</p>
+      <p>&copy; {{ 'now' | date: '%Y' }} {{ shop.name }}. Onde a imaginação cria asas!</p>
       <div class="toy-footer__utilities">
         {% if section.settings.enable_localization %}{% render 'localization-form', section_id: section.id, show_country: true, show_language: true %}{% endif %}
         {% if section.settings.show_payment_icons and shop.enabled_payment_types.size > 0 %}
@@ -85,11 +85,11 @@
   "settings": [
     { "type": "image_picker", "id": "illustration", "label": "Ilustração de fundo" },
     { "type": "image_picker", "id": "logo", "label": "Logo" },
-    { "type": "text", "id": "kicker", "label": "Chamada pequena", "default": "O clube da diversão" },
-    { "type": "text", "id": "heading", "label": "Título", "default": "Novidades que fazem os olhos brilharem" },
-    { "type": "richtext", "id": "text", "label": "Texto", "default": "<p>Receba lançamentos, ideias de presentes e ofertas para brincar muito.</p>" },
+    { "type": "text", "id": "kicker", "label": "Chamada pequena", "default": "Onde a imaginação cria asas!" },
+    { "type": "text", "id": "heading", "label": "Título", "default": "Novidades para voar em novas aventuras" },
+    { "type": "richtext", "id": "text", "label": "Texto", "default": "<p>Receba lançamentos, ideias de presentes e ofertas para brincar, imaginar e descobrir.</p>" },
     { "type": "text", "id": "newsletter_heading", "label": "Título da newsletter", "default": "Entre para a brincadeira" },
-    { "type": "text", "id": "brand_text", "label": "Texto da marca", "default": "Brinquedos escolhidos para criar memórias felizes em família." },
+    { "type": "text", "id": "brand_text", "label": "Texto da marca", "default": "Brinquedos escolhidos para dar asas à imaginação e criar memórias felizes em família." },
     { "type": "checkbox", "id": "show_social", "label": "Mostrar redes sociais", "default": true },
     { "type": "checkbox", "id": "show_payment_icons", "label": "Mostrar pagamentos", "default": true },
     { "type": "checkbox", "id": "enable_localization", "label": "Mostrar país e idioma", "default": false }

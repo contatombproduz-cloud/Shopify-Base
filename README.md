@@ -16,6 +16,30 @@ Shopify sob medida e não querem começar do zero (nem depender de Dawn).
 **Stack:** Shopify · Liquid · Online Store 2.0 · Theme Sections · Theme App
 Blocks · CSS · Vanilla JavaScript · i18n · SEO · Acessibilidade (WCAG).
 
+## Experiência Bababo Kids
+
+Esta versão foi personalizada para a Bababo Kids com a assinatura oficial
+**“Onde a imaginação cria asas!”** e uma linguagem visual de nuvens, voo,
+aventura e diversão.
+
+- **Hero em vídeo e parallax 3D:** usa `assets/bababo-hero-video.mp4`, com
+  imagem de capa, controle acessível de reprodução, pausa automática fora da
+  tela e redução de movimento quando o visitante solicita essa preferência.
+- **Minigame “Voo da Imaginação”:** toque, clique ou use Espaço para bater
+  asas, atravessar portais de nuvens e desbloquear o código configurável
+  `ASAS10` ao atingir a meta. A física usa passo fixo e movimento acelerado por
+  GPU; o mascote alterna três quadros transparentes para animar as asas.
+- **Identidade integrada:** logo Bababo, botões-nuvem, ilustrações, cores e
+  profundidade visual aplicadas à home, páginas, produtos, coleções, busca,
+  carrinho, blog, contato, 404 e rodapé.
+- **Páginas especiais:** modelos `page.sobre`, `page.guia-presentes` e
+  `page.faq`, todos editáveis no editor do tema.
+
+> O tema apenas revela o código do prêmio. Para o desconto funcionar, crie no
+> Admin da Shopify um desconto com o mesmo código configurado na seção
+> **Bababo — Jogo do voo**. Trocar o código, a meta ou o tempo do jogo não exige
+> editar arquivos.
+
 <p>
   <img alt="Shopify" src="https://img.shields.io/badge/Shopify-OS%202.0-96bf48?logo=shopify&logoColor=white">
   <img alt="Liquid" src="https://img.shields.io/badge/Liquid-theme-1a1a1a">
@@ -112,6 +136,9 @@ Cada arquivo define **quais seções** aparecem num tipo de página. São JSON
 | `article.json` | Post individual do blog |
 | `page.json` | Página institucional genérica |
 | `page.contact.json` | Página de contato (com formulário) |
+| `page.sobre.json` | Página institucional com história e valores da Bababo |
+| `page.guia-presentes.json` | Guia infantil de presentes por perfil e ocasião |
+| `page.faq.json` | Perguntas frequentes com identidade Bababo |
 | `password.json` | Página de senha (loja fechada/em breve) |
 | `404.json` | Página de erro 404 |
 | `gift_card.liquid` | Vale-presente (QR code, Apple Wallet) — arquivo Liquid standalone |
@@ -145,6 +172,12 @@ cabeçalho/rodapé (permitem reordenar no editor).
 | `collection-list.liquid` | Lista de coleções em cards — home |
 | `rich-text.liquid` | Bloco de texto rico centralizado — home |
 | `related-products.liquid` | Produtos relacionados (API de recomendações) |
+| `toy-store-hero.liquid` | Hero Bababo com vídeo, conteúdo em camadas e parallax 3D |
+| `toy-store-header.liquid` | Cabeçalho infantil e menu lateral da home |
+| `toy-store-discovery.liquid` | Categorias e marcas em destaque |
+| `bababo-flight-game.liquid` | Minigame do passarinho e prêmio configurável |
+| `toy-page-hero.liquid` | Hero compartilhado pelas páginas especiais |
+| `toy-about.liquid` / `toy-gifts.liquid` / `toy-faq.liquid` | Conteúdo das páginas especiais |
 
 ### `snippets/`
 Pedaços reutilizáveis chamados via `{% render 'nome' %}`.
@@ -176,6 +209,13 @@ Pedaços reutilizáveis chamados via `{% render 'nome' %}`.
 | `fontes.css` | Placeholder para fontes próprias (por padrão usa fontes do Shopify) |
 | `carrinho.js` | Add-to-cart via AJAX + atualização do contador (com fallback nativo) |
 | `site.webmanifest` | Manifesto PWA |
+| `toy-store.css` | Identidade Bababo, responsividade, botões-nuvem, hero, jogo e rodapé |
+| `toy-store.js` | Menu lateral, revelações, parallax, ponteiro 3D e controle do vídeo |
+| `bababo-flight-game.js` | Lógica acessível e sem rastreamento do minigame |
+| `bababo-hero-video.mp4` | Vídeo local usado como fundo do hero |
+| `bababo-bird-mascot.png` | Mascote original usado no hero e no minigame |
+| `bababo-bird-frame-mid.png` | Quadro intermediário da animação de voo |
+| `bababo-bird-frame-down.png` | Quadro inferior da animação de voo |
 
 ### `config/`
 | Arquivo | Função |
