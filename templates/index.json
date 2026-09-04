@@ -132,83 +132,6 @@
         "height": 640
       }
     },
-    "bababo_categories_xRUBJc": {
-      "type": "bababo-categories",
-      "blocks": {
-        "category_K9F9GA": {
-          "type": "category",
-          "settings": {
-            "icon": "🎀",
-            "default_asset": "bababo-category-girls.png",
-            "title": "Meninas",
-            "caption": "Brincar, criar e imaginar",
-            "link": "",
-            "color": "#ffe1ef"
-          }
-        },
-        "category_rNdKig": {
-          "type": "category",
-          "settings": {
-            "icon": "🚀",
-            "default_asset": "bababo-category-boys.png",
-            "title": "Meninos",
-            "caption": "Ação e aventura",
-            "link": "",
-            "color": "#dff0ff"
-          }
-        },
-        "category_FaqY88": {
-          "type": "category",
-          "settings": {
-            "icon": "🍼",
-            "default_asset": "bababo-category-babies.png",
-            "title": "Bebês",
-            "caption": "Mordedores e cuidado",
-            "link": "",
-            "color": "#dff9e7"
-          }
-        },
-        "category_WETghb": {
-          "type": "category",
-          "settings": {
-            "icon": "🦖",
-            "default_asset": "bababo-category-babies.png",
-            "title": "Mordedores",
-            "caption": "Dino e silicone",
-            "link": "",
-            "color": "#fff4c5"
-          }
-        },
-        "category_9JYerR": {
-          "type": "category",
-          "settings": {
-            "icon": "🚗",
-            "default_asset": "none",
-            "title": "Carrinhos",
-            "caption": "Colecionáveis",
-            "link": "",
-            "color": "#efe0ff"
-          }
-        }
-      },
-      "block_order": [
-        "category_K9F9GA",
-        "category_rNdKig",
-        "category_FaqY88",
-        "category_WETghb",
-        "category_9JYerR"
-      ],
-      "name": "Bababo - Categorias",
-      "settings": {
-        "heading": "Categorias favoritas",
-        "subheading": "Organize a loja por linhas simples para meninas, meninos e bebês.",
-        "link_label": "ver tudo",
-        "link_url": "",
-        "background": "#ffffff",
-        "padding_top": 32,
-        "padding_bottom": 24
-      }
-    },
     "toy_discovery": {
       "type": "toy-store-discovery",
       "blocks": {
@@ -403,7 +326,6 @@
         "brand_seven",
         "brand_eight"
       ],
-      "disabled": true,
       "settings": {
         "heading": "Marcas mais desejadas",
         "link_label": "ver todas",
@@ -437,7 +359,6 @@
   "order": [
     "toy_header",
     "toy_hero",
-    "bababo_categories_xRUBJc",
     "toy_discovery",
     "bababo_game",
     "featured"
